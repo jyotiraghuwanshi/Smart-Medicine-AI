@@ -1,0 +1,2368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Smart Medicine AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ===================================================== -->
+<!-- DASHBOARD WRAPPER -->
+<!-- ===================================================== -->
+
+<div class="dashboard">
+
+
+    <!-- ================================================= -->
+    <!-- SIDEBAR -->
+    <!-- ================================================= -->
+
+    <div class="sidebar">
+
+        <h2>
+
+            <i class="fa-solid fa-pills"></i>
+
+            Smart Medicine AI
+
+        </h2>
+
+
+        <ul>
+
+            <li class="active">
+
+                <a href="dashboard.html">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="medicines.html">
+
+                    <i class="fa-solid fa-capsules"></i>
+
+                    Medicines
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="analytics.html">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Analytics
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="caregiver.html">
+
+                    <i class="fa-solid fa-user-doctor"></i>
+
+                    Caregiver
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="profile.html">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Profile
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ================================================= -->
+
+    <div class="main">
+
+
+        <!-- ================================================= -->
+        <!-- NAVBAR / WELCOME -->
+        <!-- ================================================= -->
+
+        <div class="navbar">
+
+
+            <div class="nav-left welcome">
+
+                <h1 id="greeting">
+
+                    Good Morning 👋
+
+                </h1>
+
+
+                <p id="date">
+
+                    Loading date...
+
+                </p>
+
+
+                <!-- CLOCK RESTORED -->
+
+                <p id="clock">
+
+                    --:--:--
+
+                </p>
+
+
+                <p id="welcomeText">
+
+                    Welcome to your Smart Medicine Dashboard
+
+                </p>
+
+            </div>
+
+
+
+            <div class="nav-icons">
+
+
+                <i class="fa-solid fa-bell"></i>
+
+
+                <div class="profile-box">
+
+
+                    <i class="fa-solid fa-user-circle"></i>
+
+
+                    <span id="topPatientName">
+
+                        Patient
+
+                    </span>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- DASHBOARD CARDS -->
+        <!-- ================================================= -->
+
+        <div class="cards dashboard-cards">
+
+
+            <!-- TODAY'S MEDICINES -->
+
+            <div class="card dashboard-card">
+
+                <h3>
+
+                    Today's Medicines
+
+                </h3>
+
+
+                <h2 id="todayMedicineCount">
+
+                    0
+
+                </h2>
+
+            </div>
+
+
+
+            <!-- MEDICINE STOCK -->
+
+            <div class="card dashboard-card">
+
+                <h3>
+
+                    Medicine Stock
+
+                </h3>
+
+
+                <h2 id="medicineStock">
+
+                    0 Tablets
+
+                </h2>
+
+            </div>
+
+
+
+            <!-- NEXT REMINDER -->
+
+            <div class="card dashboard-card">
+
+                <h3>
+
+                    Next Reminder
+
+                </h3>
+
+
+                <h2 id="nextReminder">
+
+                    --
+
+                </h2>
+
+
+                <div id="nextMedicineName"
+                    style="margin-top:6px; color:#555;">
+
+                </div>
+
+
+                <div class="countdown-box"
+                    style="
+                        margin-top:18px;
+                        background:#eef4ff;
+                        padding:15px;
+                        border-radius:10px;
+                        text-align:center;
+                    ">
+
+                    <div>
+
+                        Countdown
+
+                    </div>
+
+
+                    <span id="countdown">
+
+                        --
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- HEALTH STATUS -->
+        <!-- ================================================= -->
+
+        <div class="card health-card">
+
+
+            <h3>
+
+                Health Status
+
+            </h3>
+
+
+            <h2>
+
+                Stable
+
+            </h2>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- MEDICINE SCHEDULE -->
+        <!-- ================================================= -->
+
+        <div class="schedule">
+
+
+            <h2>
+
+                Today's Medicine Schedule
+
+            </h2>
+
+
+            <div style="overflow-x:auto;">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+
+                                Medicine
+
+                            </th>
+
+
+                            <th>
+
+                                Time
+
+                            </th>
+
+
+                            <th>
+
+                                Status
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="medicineTableBody">
+
+
+                        <tr>
+
+                            <td colspan="3">
+
+                                Loading medicines...
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- PATIENT INFORMATION -->
+        <!-- ================================================= -->
+
+        <div class="patient-card">
+
+
+            <h2>
+
+                Patient Information
+
+            </h2>
+
+
+            <div class="patient-grid">
+
+
+                <div>
+
+                    <strong>Name:</strong>
+
+                    <span id="patientName">
+
+                        --
+
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>Age:</strong>
+
+                    <span id="patientAge">
+
+                        --
+
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>Gender:</strong>
+
+                    <span id="patientGender">
+
+                        --
+
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>Blood Group:</strong>
+
+                    <span id="patientBloodGroup">
+
+                        --
+
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>Height:</strong>
+
+                    <span id="patientHeight">
+
+                        --
+
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>Weight:</strong>
+
+                    <span id="patientWeight">
+
+                        --
+
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>Disease:</strong>
+
+                    <span id="patientDisease">
+
+                        --
+
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>Doctor:</strong>
+
+                    <span id="patientDoctor">
+
+                        --
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- CAREGIVER INFORMATION -->
+        <!-- ================================================= -->
+
+        <div class="patient-card">
+
+
+            <h2>
+
+                Caregiver Information
+
+            </h2>
+
+
+            <div class="caregiver-box"
+                style="
+                    background:#eef4ff;
+                    padding:15px;
+                    border-radius:10px;
+                ">
+
+
+                <p>
+
+                    <strong>Caregiver:</strong>
+
+                    <span id="caregiverNameDisplay">
+
+                        --
+
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>Mobile:</strong>
+
+                    <span id="caregiverNumberDisplay">
+
+                        --
+
+                    </span>
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- KUKKU AI ASSISTANT -->
+        <!-- ================================================= -->
+
+        <div class="ai-card">
+
+
+            <h2>
+
+                🤖 AI Health Assistant
+
+            </h2>
+
+
+            <div id="kukuChat"
+                style="
+                    height:300px;
+                    overflow-y:auto;
+                    padding:15px;
+                    background:#f8f9fa;
+                    border-radius:10px;
+                    margin-bottom:15px;
+                ">
+
+
+                <div>
+
+                    <strong>KUKKU:</strong>
+
+                    Hello! I am KUKKU, your AI healthcare assistant.
+                    How can I help you today?
+
+                </div>
+
+
+            </div>
+
+
+            <div style="
+                display:flex;
+                gap:10px;
+            ">
+
+
+                <input
+                    type="text"
+                    id="kukuInput"
+                    placeholder="Ask KUKKU something..."
+                    style="
+                        flex:1;
+                        padding:12px;
+                        border:1px solid #ddd;
+                        border-radius:8px;
+                        font-family:Poppins,sans-serif;
+                    ">
+
+
+                <button
+                    class="action-btn"
+                    onclick="askKukku()">
+
+                    Send
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- EMERGENCY -->
+        <!-- ================================================= -->
+
+        <div class="sos-card">
+
+
+            <h2>
+
+                🚨 Emergency Help
+
+            </h2>
+
+
+            <p>
+
+                If the patient needs immediate assistance,
+                press the button below.
+
+            </p>
+
+
+            <button
+                class="sos-btn"
+                onclick="callEmergency()">
+
+                <i class="fa-solid fa-phone"></i>
+
+                Emergency
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- FOOTER -->
+        <!-- ================================================= -->
+
+        <footer style="
+            text-align:center;
+            margin-top:40px;
+            color:#666;
+        ">
+
+
+            <hr style="margin-bottom:20px;">
+
+
+            <p>
+
+                © 2026 Smart Medicine AI |
+                AI-Based Medicine Reminder System
+
+            </p>
+
+
+        </footer>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ===================================================== -->
+<!-- FIREBASE -->
+<!-- ===================================================== -->
+
+<script type="module">
+
+
+import { db } from "./js/firebase.js";
+
+
+import {
+    collection,
+    getDocs,
+    doc,
+    getDoc
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+
+
+const PATIENT_ID = "P001";
+
+
+let countdownTimer = null;
+
+
+
+// =====================================================
+// TODAY'S DATE
+// =====================================================
+
+function getToday() {
+
+
+    const now = new Date();
+
+
+    return (
+
+        now.getFullYear() +
+
+        "-" +
+
+        String(
+            now.getMonth() + 1
+        ).padStart(2, "0") +
+
+        "-" +
+
+        String(
+            now.getDate()
+        ).padStart(2, "0")
+
+    );
+
+}
+
+
+
+// =====================================================
+// FORMAT TIME
+// =====================================================
+
+function formatTime(time) {
+
+
+    if (!time) {
+
+        return "--";
+
+    }
+
+
+    const parts =
+        time.split(":");
+
+
+    if (parts.length < 2) {
+
+        return time;
+
+    }
+
+
+    let hour =
+        parseInt(
+            parts[0],
+            10
+        );
+
+
+    const minute =
+        parts[1];
+
+
+    const ampm =
+        hour >= 12
+            ? "PM"
+            : "AM";
+
+
+    hour =
+        hour % 12 || 12;
+
+
+    return (
+
+        String(hour) +
+
+        ":" +
+
+        minute +
+
+        " " +
+
+        ampm
+
+    );
+
+}
+
+
+
+// =====================================================
+// GET MEDICINE TIME
+// =====================================================
+
+function getMedicineTime(medicine) {
+
+
+    if (medicine.time) {
+
+        return medicine.time;
+
+    }
+
+
+    if (
+        medicine.compartment ===
+        "Afternoon"
+    ) {
+
+        return "14:00";
+
+    }
+
+
+    if (
+        medicine.compartment ===
+        "Evening"
+    ) {
+
+        return "18:00";
+
+    }
+
+
+    if (
+        medicine.compartment ===
+        "Night"
+    ) {
+
+        return "20:00";
+
+    }
+
+
+    return "08:00";
+
+}
+
+
+
+// =====================================================
+// LOAD PATIENT INFORMATION
+// =====================================================
+
+async function loadPatient() {
+
+
+    try {
+
+
+        const patientRef =
+            doc(
+                db,
+                "Patients",
+                PATIENT_ID
+            );
+
+
+        const patientSnap =
+            await getDoc(
+                patientRef
+            );
+
+
+        if (
+            patientSnap.exists()
+        ) {
+
+
+            const patient =
+                patientSnap.data();
+
+
+            console.log(
+                "Dashboard Firebase patient:",
+                patient
+            );
+
+
+
+            /*
+             * IMPORTANT:
+             * LOCAL STORAGE IS GIVEN PRIORITY.
+             *
+             * This prevents the Firebase
+             * "Demo Patient" value from
+             * replacing the actual patient
+             * name entered during login.
+             */
+
+
+            const savedName =
+                localStorage.getItem(
+                    "patientName"
+                );
+
+
+            const savedAge =
+                localStorage.getItem(
+                    "patientAge"
+                );
+
+
+            const savedGender =
+                localStorage.getItem(
+                    "gender"
+                );
+
+
+            const savedBloodGroup =
+                localStorage.getItem(
+                    "bloodGroup"
+                );
+
+
+            const savedHeight =
+                localStorage.getItem(
+                    "height"
+                );
+
+
+            const savedWeight =
+                localStorage.getItem(
+                    "weight"
+                );
+
+
+            const savedDisease =
+                localStorage.getItem(
+                    "disease"
+                );
+
+
+            const savedDoctor =
+                localStorage.getItem(
+                    "doctor"
+                );
+
+
+
+            // NAME
+
+            setText(
+                "patientName",
+
+                savedName ||
+                patient.name ||
+                "--"
+            );
+
+
+            setText(
+                "topPatientName",
+
+                savedName ||
+                patient.name ||
+                "Patient"
+            );
+
+
+
+            // AGE
+
+            setText(
+                "patientAge",
+
+                savedAge
+                    ? savedAge + " Years"
+                    : patient.age
+                        ? patient.age + " Years"
+                        : "--"
+            );
+
+
+
+            // GENDER
+
+            setText(
+                "patientGender",
+
+                savedGender ||
+                patient.gender ||
+                "--"
+            );
+
+
+
+            // BLOOD GROUP
+
+            setText(
+                "patientBloodGroup",
+
+                savedBloodGroup ||
+                patient.bloodGroup ||
+                "--"
+            );
+
+
+
+            // HEIGHT
+
+            setText(
+                "patientHeight",
+
+                savedHeight
+                    ? savedHeight + " cm"
+                    : patient.height
+                        ? patient.height + " cm"
+                        : "--"
+            );
+
+
+
+            // WEIGHT
+
+            setText(
+                "patientWeight",
+
+                savedWeight
+                    ? savedWeight + " kg"
+                    : patient.weight
+                        ? patient.weight + " kg"
+                        : "--"
+            );
+
+
+
+            // DISEASE
+
+            setText(
+                "patientDisease",
+
+                savedDisease ||
+                patient.disease ||
+                "--"
+            );
+
+
+
+            // DOCTOR
+
+            setText(
+                "patientDoctor",
+
+                savedDoctor ||
+                patient.doctor ||
+                "--"
+            );
+
+
+        }
+
+        else {
+
+
+            loadPatientFromLocalStorage();
+
+        }
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "Patient loading error:",
+            error
+        );
+
+
+        loadPatientFromLocalStorage();
+
+
+    }
+
+}
+
+
+
+// =====================================================
+// LOAD PATIENT FROM LOCAL STORAGE
+// =====================================================
+
+function loadPatientFromLocalStorage() {
+
+
+    setText(
+        "patientName",
+
+        localStorage.getItem(
+            "patientName"
+        ) || "--"
+    );
+
+
+    setText(
+        "topPatientName",
+
+        localStorage.getItem(
+            "patientName"
+        ) || "Patient"
+    );
+
+
+    setText(
+        "patientAge",
+
+        localStorage.getItem(
+            "patientAge"
+        )
+            ? localStorage.getItem(
+                "patientAge"
+            ) + " Years"
+            : "--"
+    );
+
+
+    setText(
+        "patientGender",
+
+        localStorage.getItem(
+            "gender"
+        ) || "--"
+    );
+
+
+    setText(
+        "patientBloodGroup",
+
+        localStorage.getItem(
+            "bloodGroup"
+        ) || "--"
+    );
+
+
+    setText(
+        "patientHeight",
+
+        localStorage.getItem(
+            "height"
+        )
+            ? localStorage.getItem(
+                "height"
+            ) + " cm"
+            : "--"
+    );
+
+
+    setText(
+        "patientWeight",
+
+        localStorage.getItem(
+            "weight"
+        )
+            ? localStorage.getItem(
+                "weight"
+            ) + " kg"
+            : "--"
+    );
+
+
+    setText(
+        "patientDisease",
+
+        localStorage.getItem(
+            "disease"
+        ) || "--"
+    );
+
+
+    setText(
+        "patientDoctor",
+
+        localStorage.getItem(
+            "doctor"
+        ) || "--"
+    );
+
+}
+
+
+
+// =====================================================
+// CAREGIVER
+// =====================================================
+
+function loadCaregiver() {
+
+
+    setText(
+        "caregiverNameDisplay",
+
+        localStorage.getItem(
+            "caregiverName"
+        ) || "--"
+    );
+
+
+    setText(
+        "caregiverNumberDisplay",
+
+        localStorage.getItem(
+            "caregiverNumber"
+        ) || "--"
+    );
+
+}
+
+
+
+// =====================================================
+// LOAD MEDICINES
+// =====================================================
+
+async function loadDashboardMedicines() {
+
+
+    const table =
+        document.getElementById(
+            "medicineTableBody"
+        );
+
+
+    try {
+
+
+        const medicinesSnapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "Medicines"
+                )
+            );
+
+
+        const doseHistorySnapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "Dose History"
+                )
+            );
+
+
+        const today =
+            getToday();
+
+
+        console.log(
+            "Medicines from Firebase:",
+            medicinesSnapshot.size
+        );
+
+
+        const takenMedicines =
+            new Set();
+
+
+
+        doseHistorySnapshot.forEach(
+            function(doseDoc) {
+
+
+                const dose =
+                    doseDoc.data();
+
+
+                if (
+
+                    dose.patientId ===
+                    PATIENT_ID &&
+
+                    dose.date ===
+                    today &&
+
+                    dose.status ===
+                    "TAKEN"
+
+                ) {
+
+
+                    takenMedicines.add(
+                        dose.medicineId
+                    );
+
+
+                }
+
+            }
+        );
+
+
+
+        const medicines = [];
+
+
+
+        medicinesSnapshot.forEach(
+            function(medicineDoc) {
+
+
+                const medicine =
+                    medicineDoc.data();
+
+
+                if (
+
+                    medicine.patientId !==
+                    PATIENT_ID
+
+                ) {
+
+                    return;
+
+                }
+
+
+
+                medicines.push({
+
+
+                    id:
+                        medicineDoc.id,
+
+
+                    name:
+                        medicine.name ||
+                        "Medicine",
+
+
+                    compartment:
+                        medicine.compartment ||
+                        "Morning",
+
+
+                    stock:
+                        Number(
+                            medicine.stock || 0
+                        ),
+
+
+                    time:
+                        getMedicineTime(
+                            medicine
+                        )
+
+
+                });
+
+            }
+        );
+
+
+
+        console.log(
+            "Dashboard patient medicines:",
+            medicines
+        );
+
+
+
+        // =================================================
+        // MEDICINE COUNT
+        // =================================================
+
+        setText(
+            "todayMedicineCount",
+            medicines.length
+        );
+
+
+
+        // =================================================
+        // STOCK
+        // =================================================
+
+        const totalStock =
+            medicines.reduce(
+                function(
+                    total,
+                    medicine
+                ) {
+
+
+                    return (
+                        total +
+                        medicine.stock
+                    );
+
+                },
+                0
+            );
+
+
+        setText(
+            "medicineStock",
+
+            totalStock +
+            " Tablets"
+        );
+
+
+
+        // =================================================
+        // CLEAR TABLE
+        // =================================================
+
+        table.innerHTML = "";
+
+
+
+        if (
+            medicines.length === 0
+        ) {
+
+
+            table.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="3"
+                        style="text-align:center;">
+
+                        No medicines found.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+
+            setText(
+                "nextReminder",
+                "--"
+            );
+
+
+            setText(
+                "nextMedicineName",
+                ""
+            );
+
+
+            setText(
+                "countdown",
+                "--"
+            );
+
+
+            return;
+
+        }
+
+
+
+        // =================================================
+        // SORT MEDICINES
+        // =================================================
+
+        medicines.sort(
+            function(a, b) {
+
+
+                return (
+                    a.time.localeCompare(
+                        b.time
+                    )
+                );
+
+            }
+        );
+
+
+
+        // =================================================
+        // CREATE TABLE
+        // =================================================
+
+        medicines.forEach(
+            function(medicine) {
+
+
+                const isTaken =
+                    takenMedicines.has(
+                        medicine.id
+                    );
+
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                row.innerHTML = `
+
+
+                    <td>
+
+                        ${medicine.name}
+
+                    </td>
+
+
+                    <td>
+
+                        ${formatTime(
+                            medicine.time
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+
+                        ${
+                            isTaken
+
+                                ? `
+
+                                    <span
+                                        style="
+                                            color:green;
+                                            font-weight:600;
+                                        ">
+
+                                        ✔ Taken
+
+                                    </span>
+
+                                `
+
+                                : `
+
+                                    <span
+                                        style="
+                                            color:orange;
+                                            font-weight:600;
+                                        ">
+
+                                        ⏰ Pending
+
+                                    </span>
+
+                                `
+                        }
+
+
+                    </td>
+
+
+                `;
+
+
+                table.appendChild(
+                    row
+                );
+
+            }
+        );
+
+
+
+        // =================================================
+        // FIND NEXT MEDICINE
+        // =================================================
+
+        const now =
+            new Date();
+
+
+        const currentMinutes =
+            now.getHours() * 60 +
+            now.getMinutes();
+
+
+        let nextMedicine =
+            null;
+
+
+
+        for (
+            const medicine
+            of medicines
+        ) {
+
+
+            const parts =
+                medicine.time.split(":");
+
+
+            const hour =
+                parseInt(
+                    parts[0],
+                    10
+                );
+
+
+            const minute =
+                parseInt(
+                    parts[1],
+                    10
+                );
+
+
+            const medicineMinutes =
+                hour * 60 +
+                minute;
+
+
+            const alreadyTaken =
+                takenMedicines.has(
+                    medicine.id
+                );
+
+
+            if (
+
+                !alreadyTaken &&
+
+                medicineMinutes >=
+                currentMinutes
+
+            ) {
+
+
+                nextMedicine =
+                    medicine;
+
+
+                break;
+
+            }
+
+        }
+
+
+
+        // =================================================
+        // NOTHING LEFT TODAY
+        // =================================================
+
+        if (!nextMedicine) {
+
+
+            const allTaken =
+                medicines.every(
+                    function(medicine) {
+
+
+                        return takenMedicines.has(
+                            medicine.id
+                        );
+
+                    }
+                );
+
+
+
+            if (allTaken) {
+
+
+                setText(
+                    "nextReminder",
+                    "All Taken"
+                );
+
+
+                setText(
+                    "nextMedicineName",
+                    "All medicines taken"
+                );
+
+
+                setText(
+                    "countdown",
+                    "Completed"
+                );
+
+
+            }
+
+            else {
+
+
+                setText(
+                    "nextReminder",
+                    "Tomorrow"
+                );
+
+
+                setText(
+                    "nextMedicineName",
+                    medicines[0].name
+                );
+
+
+                setText(
+                    "countdown",
+                    "--"
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+
+        // =================================================
+        // SHOW NEXT REMINDER
+        // =================================================
+
+        setText(
+            "nextReminder",
+
+            formatTime(
+                nextMedicine.time
+            )
+        );
+
+
+        setText(
+            "nextMedicineName",
+
+            nextMedicine.name
+        );
+
+
+        startCountdown(
+            nextMedicine.time
+        );
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "Dashboard Firebase error:",
+            error
+        );
+
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="3"
+                    style="
+                        text-align:center;
+                        color:red;
+                    ">
+
+                    Unable to load medicines.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+
+// =====================================================
+// COUNTDOWN
+// =====================================================
+
+function startCountdown(time) {
+
+
+    if (countdownTimer) {
+
+
+        clearInterval(
+            countdownTimer
+        );
+
+    }
+
+
+
+    function update() {
+
+
+        const now =
+            new Date();
+
+
+        const parts =
+            time.split(":");
+
+
+        const hour =
+            parseInt(
+                parts[0],
+                10
+            );
+
+
+        const minute =
+            parseInt(
+                parts[1],
+                10
+            );
+
+
+        const target =
+            new Date();
+
+
+        target.setHours(
+            hour,
+            minute,
+            0,
+            0
+        );
+
+
+        let difference =
+            target.getTime() -
+            now.getTime();
+
+
+        if (
+            difference < 0
+        ) {
+
+            difference = 0;
+
+        }
+
+
+        const totalSeconds =
+            Math.floor(
+                difference / 1000
+            );
+
+
+        const hours =
+            Math.floor(
+                totalSeconds / 3600
+            );
+
+
+        const minutes =
+            Math.floor(
+                (totalSeconds % 3600) / 60
+            );
+
+
+        const seconds =
+            totalSeconds % 60;
+
+
+        setText(
+            "countdown",
+
+            String(hours).padStart(
+                2,
+                "0"
+            ) +
+
+            ":" +
+
+            String(minutes).padStart(
+                2,
+                "0"
+            ) +
+
+            ":" +
+
+            String(seconds).padStart(
+                2,
+                "0"
+            )
+
+        );
+
+    }
+
+
+
+    update();
+
+
+    countdownTimer =
+        setInterval(
+            update,
+            1000
+        );
+
+}
+
+
+
+// =====================================================
+// SAFE TEXT FUNCTION
+// =====================================================
+
+function setText(
+    id,
+    value
+) {
+
+
+    const element =
+        document.getElementById(
+            id
+        );
+
+
+    if (element) {
+
+
+        element.textContent =
+            value;
+
+    }
+
+}
+
+
+
+// =====================================================
+// DATE + GREETING
+// =====================================================
+
+function updateDateAndGreeting() {
+    const now = new Date();
+    const hour = now.getHours();
+
+    let greeting;
+
+    if (hour >= 5 && hour < 12) {
+        greeting = "Good Morning 👋";
+    } else if (hour >= 12 && hour < 17) {
+        greeting = "Good Afternoon 👋";
+    } else if (hour >= 17 && hour < 21) {
+        greeting = "Good Evening 👋";
+    } else {
+        greeting = "Good Night 👋";
+    }
+
+    setText("greeting", greeting);
+
+    setText(
+        "date",
+        now.toLocaleDateString("en-IN", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        })
+    );
+}
+
+updateDateAndGreeting();
+
+// =====================================================
+// CLOCK
+// =====================================================
+
+function updateClock() {
+
+
+    const now =
+        new Date();
+
+
+    const timeText =
+        now.toLocaleTimeString(
+            "en-IN",
+            {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            }
+        );
+
+
+    setText(
+        "clock",
+        timeText
+    );
+
+}
+
+
+updateClock();
+
+
+setInterval(
+    updateClock,
+    1000
+);
+
+
+
+// =====================================================
+// START DASHBOARD
+// =====================================================
+
+updateDateAndGreeting();
+
+
+await loadPatient();
+
+
+loadCaregiver();
+
+
+await loadDashboardMedicines();
+
+
+</script>
+
+
+
+<!-- ===================================================== -->
+<!-- KUKKU AI -->
+<!-- ===================================================== -->
+
+<script>
+
+
+async function askKukku() {
+
+
+    const input =
+        document.getElementById(
+            "kukuInput"
+        );
+
+
+    const chat =
+        document.getElementById(
+            "kukuChat"
+        );
+
+
+    const message =
+        input.value.trim();
+
+
+    if (!message) {
+
+        return;
+
+    }
+
+
+
+    chat.innerHTML += `
+
+        <div style="margin-top:12px;">
+
+            <strong>You:</strong>
+
+            ${message}
+
+        </div>
+
+    `;
+
+
+
+    input.value = "";
+
+
+
+    chat.innerHTML += `
+
+        <div
+            id="kukuLoading"
+            style="margin-top:12px;">
+
+            <strong>KUKKU:</strong>
+
+            Thinking...
+
+        </div>
+
+    `;
+
+
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+
+
+    try {
+
+
+        const response =
+            await fetch(
+
+                "https://kukku-ai-backend.onrender.com/api/ask",
+
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+
+                        JSON.stringify({
+
+                            question:
+                                message
+
+                        })
+
+                }
+
+            );
+
+
+
+        if (!response.ok) {
+
+
+            throw new Error(
+
+                "KUKKU server returned " +
+                response.status
+
+            );
+
+        }
+
+
+
+        const data =
+            await response.json();
+
+
+
+        const loading =
+            document.getElementById(
+                "kukuLoading"
+            );
+
+
+        if (loading) {
+
+            loading.remove();
+
+        }
+
+
+
+        const reply =
+            data.answer ||
+            "KUKKU did not return a response.";
+
+
+
+        chat.innerHTML += `
+
+            <div style="margin-top:12px;">
+
+                <strong>KUKKU:</strong>
+
+                ${reply}
+
+            </div>
+
+        `;
+
+
+
+        chat.scrollTop =
+            chat.scrollHeight;
+
+
+    }
+
+
+    catch (error) {
+
+
+        const loading =
+            document.getElementById(
+                "kukuLoading"
+            );
+
+
+        if (loading) {
+
+            loading.remove();
+
+        }
+
+
+
+        chat.innerHTML += `
+
+            <div style="
+                margin-top:12px;
+                color:red;
+            ">
+
+                <strong>Error:</strong>
+
+                Unable to connect to KUKKU.
+
+            </div>
+
+        `;
+
+
+
+        console.error(
+            "KUKKU Error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+// =====================================================
+// ENTER KEY FOR KUKKU
+// =====================================================
+
+document
+    .getElementById("kukuInput")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+
+            if (
+                event.key === "Enter"
+            ) {
+
+
+                askKukku();
+
+            }
+
+        }
+    );
+
+
+
+// =====================================================
+// EMERGENCY
+// =====================================================
+
+function callEmergency() {
+
+
+    const caregiverNumber =
+        localStorage.getItem(
+            "caregiverNumber"
+        );
+
+
+    if (caregiverNumber) {
+
+
+        window.location.href =
+            "tel:" +
+            caregiverNumber;
+
+
+    }
+
+    else {
+
+
+        alert(
+            "Caregiver number is not available."
+        );
+
+    }
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>

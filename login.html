@@ -1,1113 +1,577 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kukku | AI Healthcare Assistant</title>
+<title>Login | Smart Medicine AI</title>
 
 <link rel="stylesheet" href="css/style.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
-.ai-main{
-    flex:1;
-    padding:30px;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
-.ai-container{
-    max-width:900px;
-    margin:0 auto;
+body{
+
+background:#eef5ff;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+min-height:100vh;
+
+padding:30px 0;
+
 }
 
-.ai-card{
-    background:#fff;
-    border-radius:20px;
-    padding:35px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+.login-box{
+
+width:430px;
+
+background:#fff;
+
+padding:35px;
+
+border-radius:18px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
 }
 
-.ai-avatar{
-    width:90px;
-    height:90px;
-    margin:0 auto 15px;
-    border-radius:50%;
-    background:#0d6efd;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:42px;
+.login-box h1{
+
+text-align:center;
+
+color:#0d6efd;
+
+margin-bottom:8px;
+
 }
 
-.ai-title{
-    text-align:center;
+.login-box p{
+
+text-align:center;
+
+color:#666;
+
+margin-bottom:25px;
+
 }
 
-.ai-title h2{
-    color:#0d6efd;
-    margin-bottom:5px;
+.input-group{
+
+margin-bottom:15px;
+
 }
 
-.ai-title p{
-    color:#666;
+.input-group label{
+
+display:block;
+
+margin-bottom:6px;
+
+font-weight:500;
+
+color:#333;
+
 }
 
-.chat-box{
-    margin-top:25px;
-    height:350px;
-    overflow-y:auto;
-    padding:20px;
-    background:#f5f8ff;
-    border-radius:15px;
+.input-group input{
+
+width:100%;
+
+padding:12px;
+
+border:1px solid #d9d9d9;
+
+border-radius:8px;
+
+font-size:15px;
+
+outline:none;
+
+transition:.3s;
+
 }
 
-.message{
-    padding:12px 16px;
-    border-radius:14px;
-    margin-bottom:15px;
-    max-width:78%;
-    line-height:1.5;
-    word-wrap:break-word;
+.input-group input:focus{
+
+border-color:#0d6efd;
+
+box-shadow:0 0 5px rgba(13,110,253,.3);
+
 }
 
-.ai-message{
-    background:#fff;
-    box-shadow:0 3px 10px rgba(0,0,0,.06);
+.section-title{
+
+margin-top:25px;
+
+margin-bottom:15px;
+
+padding-bottom:8px;
+
+border-bottom:2px solid #eef5ff;
+
+color:#0d6efd;
+
+font-size:18px;
+
+font-weight:600;
+
 }
 
-.user-message{
-    background:#0d6efd;
-    color:#fff;
-    margin-left:auto;
+.login-btn{
+
+width:100%;
+
+padding:14px;
+
+background:#0d6efd;
+
+color:#fff;
+
+font-size:16px;
+
+font-weight:600;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+transition:.3s;
+
+margin-top:10px;
+
 }
 
-/* KUKKU SPEAKER BUTTON */
+.login-btn:hover{
 
-.speak-button{
-    display:block;
-    margin-top:10px;
-    border:none;
-    background:#eef4ff;
-    color:#0d6efd;
-    padding:7px 12px;
-    border-radius:8px;
-    cursor:pointer;
-    font-family:Poppins;
-    font-size:13px;
-    transition:.2s;
-}
-
-.speak-button:hover{
-    background:#dce9ff;
-}
-
-.speak-button i{
-    margin-right:5px;
-}
-
-.start-area{
-    text-align:center;
-    margin-top:20px;
-}
-
-.start-btn{
-    border:0;
-    background:#0d6efd;
-    color:#fff;
-    padding:15px 28px;
-    border-radius:12px;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-}
-
-.start-btn:disabled{
-    opacity:.7;
-    cursor:not-allowed;
-}
-
-.mic-status{
-    text-align:center;
-    margin-top:10px;
-    color:#666;
-}
-
-.input-area{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
-}
-
-.input-area input{
-    flex:1;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-family:Poppins;
-}
-
-.send-button,
-.mic-button{
-    border:0;
-    border-radius:10px;
-    padding:0 18px;
-    background:#0d6efd;
-    color:#fff;
-    cursor:pointer;
-}
-
-.send-button:disabled{
-    opacity:.7;
-    cursor:not-allowed;
-}
-
-.mic-button{
-    width:52px;
-    padding:0;
-    border-radius:50%;
-    background:#eef4ff;
-    color:#0d6efd;
-}
-
-.server-note{
-    margin-top:12px;
-    text-align:center;
-    color:#777;
-    font-size:13px;
-}
-
-@media(max-width:700px){
-
-    .ai-main{
-        padding:20px;
-    }
-
-    .input-area{
-        flex-wrap:wrap;
-    }
-
-    .input-area input{
-        min-width:100%;
-        height:48px;
-    }
-
-    .send-button{
-        height:48px;
-    }
-
-    .mic-button{
-        height:48px;
-    }
+background:#0b5ed7;
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
-<div class="dashboard">
 
+<div class="login-box">
 
-    <!-- SIDEBAR -->
 
-    <div class="sidebar">
+<h1>
 
-        <h2>
-            <i class="fa-solid fa-pills"></i>
-            Smart Medicine AI
-        </h2>
+<i class="fa-solid fa-pills"></i>
 
-        <ul>
+Smart Medicine AI
 
-            <li>
-                <a href="dashboard.html">
-                    <i class="fa-solid fa-house"></i>
-                    Dashboard
-                </a>
-            </li>
+</h1>
 
-            <li>
-                <a href="medicines.html">
-                    <i class="fa-solid fa-capsules"></i>
-                    Medicines
-                </a>
-            </li>
 
-            <li>
-                <a href="analytics.html">
-                    <i class="fa-solid fa-chart-line"></i>
-                    Analytics
-                </a>
-            </li>
+<p>Patient Registration</p>
 
-            <li class="active">
-                <a href="ai.html">
-                    <i class="fa-solid fa-robot"></i>
-                    AI Assistant
-                </a>
-            </li>
 
-            <li>
-                <a href="caregiver.html">
-                    <i class="fa-solid fa-user-doctor"></i>
-                    Caregiver
-                </a>
-            </li>
+<!-- ================= PATIENT INFORMATION ================= -->
 
-            <li>
-                <a href="profile.html">
-                    <i class="fa-solid fa-user"></i>
-                    Profile
-                </a>
-            </li>
+<div class="section-title">
 
-        </ul>
-
-    </div>
-
-
-
-    <!-- MAIN -->
-
-    <div class="ai-main">
-
-
-        <div class="navbar">
-
-            <div>
-
-                <h1>
-                    AI Healthcare Assistant 🤖
-                </h1>
-
-                <p>
-                    Talk with Kukku, your healthcare assistant.
-                </p>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="ai-container">
-
-
-            <div class="ai-card">
-
-
-                <div class="ai-avatar">
-
-                    <i class="fa-solid fa-robot"></i>
-
-                </div>
-
-
-
-                <div class="ai-title">
-
-                    <h2>Kukku</h2>
-
-                    <p>
-                        AI Healthcare Assistant
-                    </p>
-
-                </div>
-
-
-
-                <!-- CHAT -->
-
-                <div
-                    class="chat-box"
-                    id="chatBox"
-                >
-
-                    <div class="message ai-message">
-
-                        Hello! 👋 I am
-                        <strong>Kukku</strong>,
-                        your AI healthcare assistant.
-
-                    </div>
-
-
-                    <div class="message ai-message">
-
-                        Press
-                        <strong>Start Conversation</strong>
-                        and speak to me, or type your question below.
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- VOICE -->
-
-                <div class="start-area">
-
-                    <button
-                        class="start-btn"
-                        id="startBtn"
-                        onclick="startConversation()"
-                    >
-
-                        <i class="fa-solid fa-microphone"></i>
-
-                        Start Conversation
-
-                    </button>
-
-
-                    <div
-                        class="mic-status"
-                        id="micStatus"
-                    >
-
-                        Microphone is ready.
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- INPUT -->
-
-                <div class="input-area">
-
-
-                    <input
-                        id="userInput"
-                        type="text"
-                        placeholder="Type your message..."
-                        autocomplete="off"
-                    >
-
-
-                    <button
-                        class="send-button"
-                        id="sendButton"
-                        onclick="sendMessage()"
-                    >
-
-                        <i class="fa-solid fa-paper-plane"></i>
-
-                    </button>
-
-
-                    <button
-                        class="mic-button"
-                        onclick="startListening()"
-                        title="Use microphone"
-                    >
-
-                        <i class="fa-solid fa-microphone"></i>
-
-                    </button>
-
-                </div>
-
-
-
-                <!-- SERVER STATUS -->
-
-                <div class="server-note">
-
-                    Kukku API:
-
-                    <span id="serverStatus">
-                        Checking...
-                    </span>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </div>
+Patient Information
 
 </div>
 
 
+<div class="input-group">
+
+<label>Patient Name</label>
+
+<input
+type="text"
+id="patientName"
+placeholder="Enter Patient Name">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Age</label>
+
+<input
+type="number"
+id="patientAge"
+placeholder="Enter Age">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Gender</label>
+
+<input
+type="text"
+id="gender"
+placeholder="Male / Female">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Blood Group</label>
+
+<input
+type="text"
+id="bloodGroup"
+placeholder="Example: B+">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Height (cm)</label>
+
+<input
+type="number"
+id="height"
+placeholder="Enter Height">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Weight (kg)</label>
+
+<input
+type="number"
+id="weight"
+placeholder="Enter Weight">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Disease</label>
+
+<input
+type="text"
+id="disease"
+placeholder="Example: Alzheimer's Disease">
+
+</div>
+
+
+<!-- ================= DOCTOR ================= -->
+
+<div class="section-title">
+
+Doctor Information
+
+</div>
+
+
+<div class="input-group">
+
+<label>Doctor Name</label>
+
+<input
+type="text"
+id="doctor"
+placeholder="Enter Doctor Name">
+
+</div>
+
+
+<!-- ================= MEDICINES ================= -->
+
+<div class="section-title">
+
+Medicine Information
+
+</div>
+
+
+<div class="input-group">
+
+<label>Medicine 1</label>
+
+<input
+type="text"
+id="medicine1"
+placeholder="Example: BP Tablet">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Medicine 1 Time</label>
+
+<input
+type="time"
+id="medicine1Time">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Medicine 2</label>
+
+<input
+type="text"
+id="medicine2"
+placeholder="Example: Vitamin D">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Medicine 2 Time</label>
+
+<input
+type="time"
+id="medicine2Time">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Medicine 3</label>
+
+<input
+type="text"
+id="medicine3"
+placeholder="Example: Memory Tablet">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Medicine 3 Time</label>
+
+<input
+type="time"
+id="medicine3Time">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Medicine 4</label>
+
+<input
+type="text"
+id="medicine4"
+placeholder="Example: Calcium Tablet">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Medicine 4 Time</label>
+
+<input
+type="time"
+id="medicine4Time">
+
+</div>
+
+
+<!-- ================= CAREGIVER ================= -->
+
+<div class="section-title">
+
+Caregiver Information
+
+</div>
+
+
+<div class="input-group">
+
+<label>Caregiver Name</label>
+
+<input
+type="text"
+id="caregiverName"
+placeholder="Enter Caregiver Name">
+
+</div>
+
+
+<div class="input-group">
+
+<label>Caregiver Mobile Number</label>
+
+<input
+type="tel"
+id="caregiverNumber"
+placeholder="Enter Mobile Number">
+
+</div>
+
+
+<!-- ================= LOGIN BUTTON ================= -->
+
+<button
+class="login-btn"
+onclick="loginUser()">
+
+<i class="fa-solid fa-right-to-bracket"></i>
+
+Register & Continue
+
+</button>
+
+
+</div>
+
 
 <script>
 
-
-/* =========================================================
-   KUKKU API
-   ========================================================= */
-
-const KUKKU_API =
-    "https://kukku-ai-backend.onrender.com/api/ask";
-
-const KUKKU_HEALTH =
-    "https://kukku-ai-backend.onrender.com/api/health";
-
-
-
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
-
-const chatBox =
-    document.getElementById("chatBox");
-
-const userInput =
-    document.getElementById("userInput");
-
-const sendButton =
-    document.getElementById("sendButton");
-
-const startBtn =
-    document.getElementById("startBtn");
-
-const micStatus =
-    document.getElementById("micStatus");
-
-const serverStatus =
-    document.getElementById("serverStatus");
-
-
-
-/* =========================================================
-   SPEAK KUKKU RESPONSE
-   ========================================================= */
-
-function speakKukku(text){
-
-    if(!("speechSynthesis" in window)){
-
-        alert(
-            "Your browser does not support text-to-speech."
-        );
-
-        return;
-
-    }
-
-
-    if(!text){
-
-        return;
-
-    }
-
-
-    /*
-     * Stop any previous speech.
-     */
-
-    window.speechSynthesis.cancel();
-
-
-    const utterance =
-        new SpeechSynthesisUtterance(text);
-
-
-    /*
-     * English (India)
-     */
-
-    utterance.lang =
-        "en-IN";
-
-
-    /*
-     * Comfortable speaking speed.
-     */
-
-    utterance.rate =
-        0.9;
-
-    utterance.pitch =
-        1;
-
-    utterance.volume =
-        1;
-
-
-    /*
-     * Try to select an English voice.
-     */
-
-    const voices =
-        window.speechSynthesis.getVoices();
-
-
-    const indianVoice =
-        voices.find(
-            voice =>
-                voice.lang.toLowerCase() ===
-                "en-in"
-        );
-
-
-    const englishVoice =
-        voices.find(
-            voice =>
-                voice.lang
-                .toLowerCase()
-                .startsWith("en")
-        );
-
-
-    if(indianVoice){
-
-        utterance.voice =
-            indianVoice;
-
-    }
-    else if(englishVoice){
-
-        utterance.voice =
-            englishVoice;
-
-    }
-
-
-    /*
-     * Speak after the button click.
-     */
-
-    window.speechSynthesis.speak(
-        utterance
-    );
-
-}
-
-
-
-/* =========================================================
-   ADD AI MESSAGE WITH SPEAKER BUTTON
-   ========================================================= */
-
-function addAIMessage(text){
-
-    const wrapper =
-        document.createElement("div");
-
-    wrapper.className =
-        "message ai-message";
-
-
-    /*
-     * Response text.
-     */
-
-    const textElement =
-        document.createElement("div");
-
-    textElement.textContent =
-        text;
-
-
-    wrapper.appendChild(
-        textElement
-    );
-
-
-    /*
-     * Speaker button.
-     */
-
-    const speakButton =
-        document.createElement("button");
-
-
-    speakButton.className =
-        "speak-button";
-
-
-    speakButton.innerHTML =
-        '<i class="fa-solid fa-volume-high"></i> Speak';
-
-
-    speakButton.onclick =
-        function(){
-
-            speakKukku(text);
-
-        };
-
-
-    wrapper.appendChild(
-        speakButton
-    );
-
-
-    chatBox.appendChild(
-        wrapper
-    );
-
-
-    chatBox.scrollTop =
-        chatBox.scrollHeight;
-
-}
-
-
-
-/* =========================================================
-   ADD USER MESSAGE
-   ========================================================= */
-
-function addUserMessage(text){
-
-    const message =
-        document.createElement("div");
-
-
-    message.className =
-        "message user-message";
-
-
-    message.textContent =
-        text;
-
-
-    chatBox.appendChild(
-        message
-    );
-
-
-    chatBox.scrollTop =
-        chatBox.scrollHeight;
-
-}
-
-
-
-/* =========================================================
-   LOADING MESSAGE
-   ========================================================= */
-
-function addLoadingMessage(){
-
-    const message =
-        document.createElement("div");
-
-
-    message.className =
-        "message ai-message";
-
-
-    message.id =
-        "kukkuLoading";
-
-
-    message.textContent =
-        "Kukku is thinking...";
-
-
-    chatBox.appendChild(
-        message
-    );
-
-
-    chatBox.scrollTop =
-        chatBox.scrollHeight;
-
-}
-
-
-
-function removeLoadingMessage(){
-
-    const loading =
-        document.getElementById(
-            "kukkuLoading"
-        );
-
-
-    if(loading){
-
-        loading.remove();
-
-    }
-
-}
-
-
-
-/* =========================================================
-   SEND MESSAGE TO KUKKU
-   ========================================================= */
-
-async function sendToKukku(message){
-
-    addLoadingMessage();
-
-
-    sendButton.disabled =
-        true;
-
-
-    try{
-
-
-        const response =
-            await fetch(
-                KUKKU_API,
-                {
-
-                    method:"POST",
-
-                    headers:{
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            question:
-                                message
-
-                        })
-
-                }
-            );
-
-
-        if(!response.ok){
-
-            throw new Error(
-                "HTTP error: " +
-                response.status
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        removeLoadingMessage();
-
-
-        /*
-         * Get KUKKU's answer.
-         */
-
-        const answer =
-            data.answer ||
-            data.response ||
-            data.reply ||
-            "Kukku did not return an answer.";
-
-
-        /*
-         * Display answer with
-         * speaker button.
-         */
-
-        addAIMessage(
-            answer
-        );
-
-
-    }
-
-
-    catch(error){
-
-        console.error(
-            "KUKKU API error:",
-            error
-        );
-
-
-        removeLoadingMessage();
-
-
-        addAIMessage(
-            "Kukku is currently unavailable. Please try again."
-        );
-
-    }
-
-
-    finally{
-
-        sendButton.disabled =
-            false;
-
-    }
-
-}
-
-
-
-/* =========================================================
-   SEND MESSAGE
-   ========================================================= */
-
-function sendMessage(){
-
-    const message =
-        userInput.value.trim();
-
-
-    if(!message){
-
-        return;
-
-    }
-
-
-    addUserMessage(
-        message
-    );
-
-
-    userInput.value =
-        "";
-
-
-    sendToKukku(
-        message
-    );
-
-}
-
-
-
-/* =========================================================
-   START CONVERSATION
-   ========================================================= */
-
-function startConversation(){
-
-    startListening();
-
-}
-
-
-
-/* =========================================================
-   MICROPHONE / SPEECH RECOGNITION
-   ========================================================= */
-
-function startListening(){
-
-    const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-
-    if(!SpeechRecognition){
-
-        micStatus.textContent =
-            "Voice recognition is not supported in this browser.";
-
-        return;
-
-    }
-
-
-    const recognition =
-        new SpeechRecognition();
-
-
-    recognition.lang =
-        "en-IN";
-
-
-    recognition.continuous =
-        false;
-
-
-    recognition.interimResults =
-        false;
-
-
-    micStatus.textContent =
-        "🎙️ Listening...";
-
-
-    startBtn.disabled =
-        true;
-
-
-    try{
-
-        recognition.start();
-
-    }
-
-
-    catch(error){
-
-        console.error(
-            error
-        );
-
-
-        micStatus.textContent =
-            "Microphone could not be started.";
-
-
-        startBtn.disabled =
-            false;
-
-
-        return;
-
-    }
-
-
-    recognition.onresult =
-        function(event){
-
-            const question =
-                event
-                .results[0][0]
-                .transcript;
-
-
-            micStatus.textContent =
-                "You said: " +
-                question;
-
-
-            addUserMessage(
-                question
-            );
-
-
-            sendToKukku(
-                question
-            );
-
-        };
-
-
-    recognition.onerror =
-        function(event){
-
-            console.error(
-                "Speech recognition error:",
-                event.error
-            );
-
-
-            micStatus.textContent =
-                "Microphone error. Please try again.";
-
-        };
-
-
-    recognition.onend =
-        function(){
-
-            startBtn.disabled =
-                false;
-
-
-            if(
-                micStatus.textContent ===
-                "🎙️ Listening..."
-            ){
-
-                micStatus.textContent =
-                    "Microphone is ready.";
-
-            }
-
-        };
-
-}
-
-
-
-/* =========================================================
-   ENTER KEY
-   ========================================================= */
-
-userInput.addEventListener(
-    "keydown",
-    function(event){
-
-        if(event.key === "Enter"){
-
-            event.preventDefault();
-
-            sendMessage();
-
-        }
-
-    }
+function loginUser(){
+
+
+/* ================= PATIENT INFORMATION ================= */
+
+localStorage.setItem(
+"patientName",
+document.getElementById("patientName").value
+);
+
+localStorage.setItem(
+"patientAge",
+document.getElementById("patientAge").value
+);
+
+localStorage.setItem(
+"gender",
+document.getElementById("gender").value
+);
+
+localStorage.setItem(
+"bloodGroup",
+document.getElementById("bloodGroup").value
+);
+
+localStorage.setItem(
+"height",
+document.getElementById("height").value
+);
+
+localStorage.setItem(
+"weight",
+document.getElementById("weight").value
+);
+
+localStorage.setItem(
+"disease",
+document.getElementById("disease").value
 );
 
 
+/* ================= DOCTOR ================= */
 
-/* =========================================================
-   CHECK KUKKU SERVER
-   ========================================================= */
-
-async function checkKukkuServer(){
-
-    try{
-
-        const response =
-            await fetch(
-                KUKKU_HEALTH
-            );
+localStorage.setItem(
+"doctor",
+document.getElementById("doctor").value
+);
 
 
-        if(!response.ok){
+/* ================= MEDICINES ================= */
 
-            throw new Error(
-                "KUKKU server unavailable"
-            );
+localStorage.setItem(
+"medicine1",
+document.getElementById("medicine1").value
+);
 
-        }
+localStorage.setItem(
+"medicine1Time",
+document.getElementById("medicine1Time").value
+);
+
+localStorage.setItem(
+"medicine2",
+document.getElementById("medicine2").value
+);
+
+localStorage.setItem(
+"medicine2Time",
+document.getElementById("medicine2Time").value
+);
+
+localStorage.setItem(
+"medicine3",
+document.getElementById("medicine3").value
+);
+
+localStorage.setItem(
+"medicine3Time",
+document.getElementById("medicine3Time").value
+);
+
+localStorage.setItem(
+"medicine4",
+document.getElementById("medicine4").value
+);
+
+localStorage.setItem(
+"medicine4Time",
+document.getElementById("medicine4Time").value
+);
 
 
-        serverStatus.textContent =
-            "Connected";
+/* ================= CAREGIVER ================= */
 
-    }
+localStorage.setItem(
+"caregiverName",
+document.getElementById("caregiverName").value
+);
+
+localStorage.setItem(
+"caregiverNumber",
+document.getElementById("caregiverNumber").value
+);
 
 
-    catch(error){
-
-        console.error(
-            "KUKKU health check:",
-            error
-        );
+alert("Registration Successful!");
 
 
-        serverStatus.textContent =
-            "Not connected";
-
-    }
+window.location.href = "dashboard.html";
 
 }
 
-
-
-/* =========================================================
-   START SERVER CHECK
-   ========================================================= */
-
-checkKukkuServer();
-
 </script>
 
+
 </body>
+
 </html>

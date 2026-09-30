@@ -14,7 +14,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-
 .ai-main{
     flex:1;
     padding:30px;
@@ -85,30 +84,6 @@
     background:#0d6efd;
     color:#fff;
     margin-left:auto;
-}
-
-/* KUKKU SPEAKER BUTTON */
-
-.speak-button{
-    display:block;
-    margin-top:10px;
-    border:none;
-    background:#eef4ff;
-    color:#0d6efd;
-    padding:7px 12px;
-    border-radius:8px;
-    cursor:pointer;
-    font-family:Poppins;
-    font-size:13px;
-    transition:.2s;
-}
-
-.speak-button:hover{
-    background:#dce9ff;
-}
-
-.speak-button i{
-    margin-right:5px;
 }
 
 .start-area{
@@ -183,7 +158,6 @@
 }
 
 @media(max-width:700px){
-
     .ai-main{
         padding:20px;
     }
@@ -204,20 +178,15 @@
     .mic-button{
         height:48px;
     }
-
 }
-
 </style>
 </head>
-
 
 <body>
 
 <div class="dashboard">
 
-
     <!-- SIDEBAR -->
-
     <div class="sidebar">
 
         <h2>
@@ -274,42 +243,26 @@
     </div>
 
 
-
     <!-- MAIN -->
-
     <div class="ai-main">
-
 
         <div class="navbar">
 
             <div>
-
-                <h1>
-                    AI Healthcare Assistant 🤖
-                </h1>
-
-                <p>
-                    Talk with Kukku, your healthcare assistant.
-                </p>
-
+                <h1>AI Healthcare Assistant 🤖</h1>
+                <p>Talk with Kukku, your healthcare assistant.</p>
             </div>
 
         </div>
 
 
-
         <div class="ai-container">
-
 
             <div class="ai-card">
 
-
                 <div class="ai-avatar">
-
                     <i class="fa-solid fa-robot"></i>
-
                 </div>
-
 
 
                 <div class="ai-title">
@@ -323,47 +276,33 @@
                 </div>
 
 
-
                 <!-- CHAT -->
-
-                <div
-                    class="chat-box"
-                    id="chatBox"
-                >
+                <div class="chat-box" id="chatBox">
 
                     <div class="message ai-message">
-
                         Hello! 👋 I am
                         <strong>Kukku</strong>,
                         your AI healthcare assistant.
-
                     </div>
 
-
                     <div class="message ai-message">
-
                         Press
                         <strong>Start Conversation</strong>
                         and speak to me, or type your question below.
-
                     </div>
 
                 </div>
 
 
-
                 <!-- VOICE -->
-
                 <div class="start-area">
 
                     <button
                         class="start-btn"
                         id="startBtn"
-                        onclick="startConversation()"
-                    >
+                        onclick="startConversation()">
 
                         <i class="fa-solid fa-microphone"></i>
-
                         Start Conversation
 
                     </button>
@@ -371,8 +310,7 @@
 
                     <div
                         class="mic-status"
-                        id="micStatus"
-                    >
+                        id="micStatus">
 
                         Microphone is ready.
 
@@ -381,11 +319,8 @@
                 </div>
 
 
-
                 <!-- INPUT -->
-
                 <div class="input-area">
-
 
                     <input
                         id="userInput"
@@ -394,12 +329,10 @@
                         autocomplete="off"
                     >
 
-
                     <button
                         class="send-button"
                         id="sendButton"
-                        onclick="sendMessage()"
-                    >
+                        onclick="sendMessage()">
 
                         <i class="fa-solid fa-paper-plane"></i>
 
@@ -409,8 +342,7 @@
                     <button
                         class="mic-button"
                         onclick="startListening()"
-                        title="Use microphone"
-                    >
+                        title="Use microphone">
 
                         <i class="fa-solid fa-microphone"></i>
 
@@ -419,19 +351,15 @@
                 </div>
 
 
-
                 <!-- SERVER STATUS -->
-
                 <div class="server-note">
 
                     Kukku API:
-
                     <span id="serverStatus">
                         Checking...
                     </span>
 
                 </div>
-
 
             </div>
 
@@ -442,12 +370,10 @@
 </div>
 
 
-
 <script>
 
-
 /* =========================================================
-   KUKKU API
+   KUKKU PRODUCTION API
    ========================================================= */
 
 const KUKKU_API =
@@ -455,7 +381,6 @@ const KUKKU_API =
 
 const KUKKU_HEALTH =
     "https://kukku-ai-backend.onrender.com/api/health";
-
 
 
 /* =========================================================
@@ -481,213 +406,28 @@ const serverStatus =
     document.getElementById("serverStatus");
 
 
-
 /* =========================================================
-   SPEAK KUKKU RESPONSE
+   ADD MESSAGE
    ========================================================= */
 
-function speakKukku(text){
-
-    if(!("speechSynthesis" in window)){
-
-        alert(
-            "Your browser does not support text-to-speech."
-        );
-
-        return;
-
-    }
-
-
-    if(!text){
-
-        return;
-
-    }
-
-
-    /*
-     * Stop any previous speech.
-     */
-
-    window.speechSynthesis.cancel();
-
-
-    const utterance =
-        new SpeechSynthesisUtterance(text);
-
-
-    /*
-     * English (India)
-     */
-
-    utterance.lang =
-        "en-IN";
-
-
-    /*
-     * Comfortable speaking speed.
-     */
-
-    utterance.rate =
-        0.9;
-
-    utterance.pitch =
-        1;
-
-    utterance.volume =
-        1;
-
-
-    /*
-     * Try to select an English voice.
-     */
-
-    const voices =
-        window.speechSynthesis.getVoices();
-
-
-    const indianVoice =
-        voices.find(
-            voice =>
-                voice.lang.toLowerCase() ===
-                "en-in"
-        );
-
-
-    const englishVoice =
-        voices.find(
-            voice =>
-                voice.lang
-                .toLowerCase()
-                .startsWith("en")
-        );
-
-
-    if(indianVoice){
-
-        utterance.voice =
-            indianVoice;
-
-    }
-    else if(englishVoice){
-
-        utterance.voice =
-            englishVoice;
-
-    }
-
-
-    /*
-     * Speak after the button click.
-     */
-
-    window.speechSynthesis.speak(
-        utterance
-    );
-
-}
-
-
-
-/* =========================================================
-   ADD AI MESSAGE WITH SPEAKER BUTTON
-   ========================================================= */
-
-function addAIMessage(text){
-
-    const wrapper =
-        document.createElement("div");
-
-    wrapper.className =
-        "message ai-message";
-
-
-    /*
-     * Response text.
-     */
-
-    const textElement =
-        document.createElement("div");
-
-    textElement.textContent =
-        text;
-
-
-    wrapper.appendChild(
-        textElement
-    );
-
-
-    /*
-     * Speaker button.
-     */
-
-    const speakButton =
-        document.createElement("button");
-
-
-    speakButton.className =
-        "speak-button";
-
-
-    speakButton.innerHTML =
-        '<i class="fa-solid fa-volume-high"></i> Speak';
-
-
-    speakButton.onclick =
-        function(){
-
-            speakKukku(text);
-
-        };
-
-
-    wrapper.appendChild(
-        speakButton
-    );
-
-
-    chatBox.appendChild(
-        wrapper
-    );
-
-
-    chatBox.scrollTop =
-        chatBox.scrollHeight;
-
-}
-
-
-
-/* =========================================================
-   ADD USER MESSAGE
-   ========================================================= */
-
-function addUserMessage(text){
+function addMessage(text, type){
 
     const message =
         document.createElement("div");
 
-
     message.className =
-        "message user-message";
+        "message " +
+        (type === "user"
+            ? "user-message"
+            : "ai-message");
 
+    message.textContent = text;
 
-    message.textContent =
-        text;
-
-
-    chatBox.appendChild(
-        message
-    );
-
+    chatBox.appendChild(message);
 
     chatBox.scrollTop =
         chatBox.scrollHeight;
-
 }
-
 
 
 /* =========================================================
@@ -699,47 +439,32 @@ function addLoadingMessage(){
     const message =
         document.createElement("div");
 
-
     message.className =
         "message ai-message";
-
 
     message.id =
         "kukkuLoading";
 
-
     message.textContent =
         "Kukku is thinking...";
 
-
-    chatBox.appendChild(
-        message
-    );
-
+    chatBox.appendChild(message);
 
     chatBox.scrollTop =
         chatBox.scrollHeight;
-
 }
-
 
 
 function removeLoadingMessage(){
 
     const loading =
-        document.getElementById(
-            "kukkuLoading"
-        );
-
+        document.getElementById("kukkuLoading");
 
     if(loading){
-
         loading.remove();
-
     }
 
 }
-
 
 
 /* =========================================================
@@ -750,19 +475,14 @@ async function sendToKukku(message){
 
     addLoadingMessage();
 
-
-    sendButton.disabled =
-        true;
-
+    sendButton.disabled = true;
 
     try{
-
 
         const response =
             await fetch(
                 KUKKU_API,
                 {
-
                     method:"POST",
 
                     headers:{
@@ -770,14 +490,9 @@ async function sendToKukku(message){
                             "application/json"
                     },
 
-                    body:
-                        JSON.stringify({
-
-                            question:
-                                message
-
-                        })
-
+                    body:JSON.stringify({
+                        question:message
+                    })
                 }
             );
 
@@ -800,28 +515,33 @@ async function sendToKukku(message){
 
 
         /*
-         * Get KUKKU's answer.
+         * KUKKU returns:
+         *
+         * {
+         *   "answer":"...",
+         *   "intent":"..."
+         * }
          */
 
         const answer =
             data.answer ||
-            data.response ||
-            data.reply ||
             "Kukku did not return an answer.";
 
 
-        /*
-         * Display answer with
-         * speaker button.
-         */
-
-        addAIMessage(
-            answer
+        addMessage(
+            answer,
+            "ai"
         );
 
 
-    }
+        /*
+         * Optional voice output.
+         * Currently disabled so we don't
+         * change the existing UI behavior.
+         */
 
+
+    }
 
     catch(error){
 
@@ -834,26 +554,24 @@ async function sendToKukku(message){
         removeLoadingMessage();
 
 
-        addAIMessage(
-            "Kukku is currently unavailable. Please try again."
+        addMessage(
+            "Kukku is currently unavailable. Please try again.",
+            "ai"
         );
 
     }
 
-
     finally{
 
-        sendButton.disabled =
-            false;
+        sendButton.disabled = false;
 
     }
 
 }
 
 
-
 /* =========================================================
-   SEND MESSAGE
+   SEND BUTTON
    ========================================================= */
 
 function sendMessage(){
@@ -863,27 +581,22 @@ function sendMessage(){
 
 
     if(!message){
-
         return;
-
     }
 
 
-    addUserMessage(
-        message
+    addMessage(
+        message,
+        "user"
     );
 
 
-    userInput.value =
-        "";
+    userInput.value = "";
 
 
-    sendToKukku(
-        message
-    );
+    sendToKukku(message);
 
 }
-
 
 
 /* =========================================================
@@ -897,9 +610,8 @@ function startConversation(){
 }
 
 
-
 /* =========================================================
-   MICROPHONE / SPEECH RECOGNITION
+   MICROPHONE
    ========================================================= */
 
 function startListening(){
@@ -926,10 +638,8 @@ function startListening(){
     recognition.lang =
         "en-IN";
 
-
     recognition.continuous =
         false;
-
 
     recognition.interimResults =
         false;
@@ -937,7 +647,6 @@ function startListening(){
 
     micStatus.textContent =
         "🎙️ Listening...";
-
 
     startBtn.disabled =
         true;
@@ -949,21 +658,15 @@ function startListening(){
 
     }
 
-
     catch(error){
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         micStatus.textContent =
             "Microphone could not be started.";
 
-
         startBtn.disabled =
             false;
-
 
         return;
 
@@ -980,12 +683,12 @@ function startListening(){
 
 
             micStatus.textContent =
-                "You said: " +
-                question;
+                "You said: " + question;
 
 
-            addUserMessage(
-                question
+            addMessage(
+                question,
+                "user"
             );
 
 
@@ -1033,7 +736,6 @@ function startListening(){
 }
 
 
-
 /* =========================================================
    ENTER KEY
    ========================================================= */
@@ -1054,7 +756,6 @@ userInput.addEventListener(
 );
 
 
-
 /* =========================================================
    CHECK KUKKU SERVER
    ========================================================= */
@@ -1072,7 +773,7 @@ async function checkKukkuServer(){
         if(!response.ok){
 
             throw new Error(
-                "KUKKU server unavailable"
+                "Server unavailable"
             );
 
         }
@@ -1081,8 +782,8 @@ async function checkKukkuServer(){
         serverStatus.textContent =
             "Connected";
 
-    }
 
+    }
 
     catch(error){
 
@@ -1098,7 +799,6 @@ async function checkKukkuServer(){
     }
 
 }
-
 
 
 /* =========================================================

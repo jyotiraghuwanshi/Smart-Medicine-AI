@@ -3,103 +3,111 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-    <title>Medicines | Smart Medicine AI</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/style.css">
+<title>Medicines | Smart Medicine AI</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet"
+href="css/style.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <style>
 
-        .main {
-            margin-left: 250px;
-            min-height: 100vh;
-            padding: 35px 30px;
-            box-sizing: border-box;
-        }
+<style>
 
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 250px;
-            height: 100vh;
-            z-index: 1000;
-        }
+.medicine-search{
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
+    width:400px;
 
-        .search-box {
-            margin-bottom: 25px;
-        }
+    max-width:100%;
 
-        .search-box input {
-            width: 100%;
-            max-width: 400px;
-            padding: 12px 15px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            font-family: Poppins, sans-serif;
-            box-sizing: border-box;
-        }
+    padding:14px;
 
-        .schedule {
-            width: 100%;
-            box-sizing: border-box;
-            overflow-x: auto;
-        }
+    border:1px solid #ddd;
 
-        .schedule table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    border-radius:10px;
 
-        .schedule th,
-        .schedule td {
-            padding: 15px;
-            text-align: center;
-        }
+    font-size:15px;
 
-        .take-btn {
-            padding: 7px 15px;
-            border: 1px solid #333;
-            border-radius: 5px;
-            background: white;
-            cursor: pointer;
-        }
+    margin-bottom:20px;
 
-        .take-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
+}
 
-        @media (max-width: 800px) {
 
-            .sidebar {
-                width: 210px;
-            }
+.medicine-status{
 
-            .main {
-                margin-left: 210px;
-            }
+    font-weight:600;
 
-        }
+}
 
-    </style>
+
+.take-btn,
+.untake-btn{
+
+    padding:10px 20px;
+
+    border:none;
+
+    border-radius:8px;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+
+.take-btn{
+
+    background:#2563eb;
+
+}
+
+
+.take-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+.untake-btn{
+
+    background:#f59e0b;
+
+}
+
+
+.untake-btn:hover{
+
+    background:#d97706;
+
+}
+
+
+.status-taken{
+
+    color:#16a34a;
+
+}
+
+
+.status-pending{
+
+    color:#f59e0b;
+
+}
+
+</style>
 
 </head>
 
@@ -107,148 +115,224 @@
 <body>
 
 
-<!-- ================= SIDEBAR ================= -->
+<div class="dashboard">
+
 
 <div class="sidebar">
 
-    <h2>
-        <i class="fa-solid fa-pills"></i>
-        Smart Medicine AI
-    </h2>
+<h2>
 
-    <ul>
+<i class="fa-solid fa-pills"></i>
 
-        <li>
-            <a href="dashboard.html">
-                <i class="fa-solid fa-house"></i>
-                Dashboard
-            </a>
-        </li>
+Smart Medicine AI
 
-        <li class="active">
-            <a href="medicines.html">
-                <i class="fa-solid fa-capsules"></i>
-                Medicines
-            </a>
-        </li>
+</h2>
 
-        <li>
-            <a href="analytics.html">
-                <i class="fa-solid fa-chart-line"></i>
-                Analytics
-            </a>
-        </li>
 
-        <li>
-            <a href="caregiver.html">
-                <i class="fa-solid fa-user-doctor"></i>
-                Caregiver
-            </a>
-        </li>
+<ul>
 
-        <li>
-            <a href="profile.html">
-                <i class="fa-solid fa-user"></i>
-                Profile
-            </a>
-        </li>
+<li>
 
-    </ul>
+<a href="dashboard.html">
+
+<i class="fa-solid fa-house"></i>
+
+Dashboard
+
+</a>
+
+</li>
+
+
+<li class="active">
+
+<a href="medicines.html">
+
+<i class="fa-solid fa-capsules"></i>
+
+Medicines
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="analytics.html">
+
+<i class="fa-solid fa-chart-line"></i>
+
+Analytics
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="ai.html">
+
+<i class="fa-solid fa-robot"></i>
+
+AI Assistant
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="caregiver.html">
+
+<i class="fa-solid fa-user-doctor"></i>
+
+Caregiver
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="profile.html">
+
+<i class="fa-solid fa-user"></i>
+
+Profile
+
+</a>
+
+</li>
+
+</ul>
 
 </div>
 
 
-<!-- ================= MAIN ================= -->
 
 <div class="main">
 
 
-    <!-- ================= NAVBAR ================= -->
-
-    <div class="navbar">
-
-        <div>
-
-            <h1>
-                Medicines 💊
-            </h1>
-
-            <p>
-                Manage all prescribed medicines
-            </p>
-
-        </div>
+<div class="navbar">
 
 
-        <div class="nav-icons">
+<div>
 
-            <i class="fa-solid fa-bell"></i>
+<h1>
 
-            <div class="profile-box">
+Medicines 💊
 
-                <i class="fa-solid fa-user-circle"></i>
+</h1>
 
-                <span id="topPatientName">
-                    Patient
-                </span>
+<p>
+Manage all prescribed medicines
+</p>
 
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 
-    <!-- ================= SEARCH ================= -->
+<div class="nav-icons">
 
-    <div class="search-box">
-
-        <input
-            type="text"
-            id="medicineSearch"
-            placeholder="🔍 Search medicine...">
-
-    </div>
+<i class="fa-solid fa-bell"></i>
 
 
-    <!-- ================= MEDICINE LIST ================= -->
+<div class="profile-box">
 
-    <div class="schedule">
+<i class="fa-solid fa-user-circle"></i>
 
-        <h2>
-            Medicine List
-        </h2>
+<span id="topPatientName">
+Patient
+</span>
 
-        <table>
+</div>
 
-            <thead>
+</div>
 
-                <tr>
+</div>
 
-                    <th>Medicine</th>
-                    <th>Dosage</th>
-                    <th>Time</th>
-                    <th>Status</th>
-                    <th>Action</th>
 
-                </tr>
 
-            </thead>
+<input
+type="text"
+id="medicineSearch"
+class="medicine-search"
+placeholder="🔍 Search medicine...">
 
-            <tbody id="medicineTableBody">
 
-                <tr>
-                    <td colspan="5">
-                        Loading medicines...
-                    </td>
-                </tr>
 
-            </tbody>
+<div class="schedule">
 
-        </table>
 
-    </div>
+<h2>
+Medicine List
+</h2>
 
+
+<div style="overflow-x:auto;">
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Medicine
+</th>
+
+<th>
+Dosage
+</th>
+
+<th>
+Time
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Action
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="medicineTableBody">
+
+</tbody>
+
+</table>
+
+
+</div>
+
+</div>
+
+
+
+<footer
+style="text-align:center;margin-top:40px;color:#666;">
+
+<hr style="margin-bottom:20px;">
+
+<p>
+© 2026 Smart Medicine AI |
+AI-Based Medicine Reminder System
+</p>
+
+</footer>
+
+
+</div>
 
 </div>
 
@@ -256,557 +340,195 @@
 <script src="js/script.js"></script>
 
 
-<!-- ================= FIREBASE ================= -->
+<script>
 
-<script type="module">
+function loadMedicines(){
 
-import { db } from "./js/firebase.js";
-
-import {
-    collection,
-    getDocs,
-    addDoc
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+    const name =
+        localStorage.getItem(
+            "patientName"
+        ) || "Patient";
 
 
-const PATIENT_ID = "P001";
+    document.getElementById(
+        "topPatientName"
+    ).textContent = name;
 
 
-// =====================================================
-// GET TODAY'S DATE
-// =====================================================
 
-function getToday() {
-
-    const now = new Date();
-
-    return (
-        now.getFullYear() +
-        "-" +
-        String(now.getMonth() + 1).padStart(2, "0") +
-        "-" +
-        String(now.getDate()).padStart(2, "0")
-    );
-
-}
+    const medicines =
+        getMedicines();
 
 
-// =====================================================
-// LOAD MEDICINES
-// =====================================================
+    const takenData =
+        getTakenMedicines();
 
-async function loadMedicines() {
+
+    const today =
+        todayDate();
+
 
     const table =
-        document.getElementById("medicineTableBody");
-
-
-    try {
-
-        // ---------------------------------------------
-        // LOAD MEDICINES
-        // ---------------------------------------------
-
-        const medicinesSnapshot =
-            await getDocs(
-                collection(db, "Medicines")
-            );
-
-
-        // ---------------------------------------------
-        // LOAD DOSE HISTORY
-        // ---------------------------------------------
-
-        const doseHistorySnapshot =
-            await getDocs(
-                collection(db, "Dose History")
-            );
-
-
-        // ---------------------------------------------
-        // TODAY
-        // ---------------------------------------------
-
-        const today =
-            getToday();
-
-
-        // ---------------------------------------------
-        // STORE TAKEN MEDICINES
-        // ---------------------------------------------
-
-        const takenMedicines =
-            new Set();
-
-
-        doseHistorySnapshot.forEach(
-            function(doseDoc) {
-
-                const dose =
-                    doseDoc.data();
-
-
-                if (
-                    dose.patientId === PATIENT_ID &&
-                    dose.date === today &&
-                    dose.status === "TAKEN"
-                ) {
-
-                    takenMedicines.add(
-                        dose.medicineId
-                    );
-
-                }
-
-            }
+        document.getElementById(
+            "medicineTableBody"
         );
 
 
-        table.innerHTML = "";
-
-        let count = 0;
+    table.innerHTML = "";
 
 
-        // ---------------------------------------------
-        // CREATE MEDICINE ROWS
-        // ---------------------------------------------
+    medicines.forEach(
+        function(medicine){
 
-        medicinesSnapshot.forEach(
-            function(medicineDoc) {
-
-                const medicine =
-                    medicineDoc.data();
+            const taken =
+                takenData[today] &&
+                takenData[today][medicine.id];
 
 
-                if (
-                    medicine.patientId !== PATIENT_ID
-                ) {
-
-                    return;
-
-                }
+            const row =
+                document.createElement("tr");
 
 
-                count++;
+            row.innerHTML =
+
+                "<td>" +
+                medicine.name +
+                "</td>" +
+
+                "<td>1 Tablet</td>" +
+
+                "<td>" +
+                formatMedicineTime(
+                    medicine.time
+                ) +
+                "</td>" +
+
+                "<td class='medicine-status'>" +
+
+                (
+                    taken
+
+                    ?
+
+                    '<span class="status-taken">✔ Taken</span>'
+
+                    :
+
+                    '<span class="status-pending">⏰ Pending</span>'
+                )
+
+                +
+
+                "</td>" +
+
+                "<td>" +
+
+                (
+                    taken
+
+                    ?
+
+                    '<button class="untake-btn" onclick="undoMedicine(\'' +
+                    medicine.id +
+                    '\')">Untake</button>'
+
+                    :
+
+                    '<button class="take-btn" onclick="takeMedicine(\'' +
+                    medicine.id +
+                    '\')">Take</button>'
+                )
+
+                +
+
+                "</td>";
 
 
-                const medicineId =
-                    medicineDoc.id;
-
-
-                const medicineName =
-                    medicine.name ||
-                    "Medicine";
-
-
-                const compartment =
-                    medicine.compartment ||
-                    "Morning";
-
-
-                let medicineTime =
-                    "8:00 AM";
-
-
-                if (
-                    compartment === "Afternoon"
-                ) {
-
-                    medicineTime =
-                        "2:00 PM";
-
-                }
-
-                else if (
-                    compartment === "Evening"
-                ) {
-
-                    medicineTime =
-                        "6:00 PM";
-
-                }
-
-                else if (
-                    compartment === "Night"
-                ) {
-
-                    medicineTime =
-                        "8:00 PM";
-
-                }
-
-
-                // -----------------------------------------
-                // CHECK IF ALREADY TAKEN
-                // -----------------------------------------
-
-                const isTaken =
-                    takenMedicines.has(
-                        medicineId
-                    );
-
-
-                let statusHTML;
-                let buttonHTML;
-
-
-                if (isTaken) {
-
-                    statusHTML = `
-                        <span style="
-                            color:green;
-                            font-weight:600;
-                        ">
-                            ✔ Taken
-                        </span>
-                    `;
-
-
-                    buttonHTML = `
-                        <button
-                            class="take-btn"
-                            disabled
-                        >
-                            Taken
-                        </button>
-                    `;
-
-                }
-
-                else {
-
-                    statusHTML = `
-                        <span style="
-                            color:orange;
-                            font-weight:600;
-                        ">
-                            ⏰ Pending
-                        </span>
-                    `;
-
-
-                    buttonHTML = `
-                        <button
-                            class="take-btn"
-                            onclick="markMedicineTaken(
-                                this,
-                                '${medicineId}',
-                                '${medicineName}',
-                                '${compartment}'
-                            )"
-                        >
-                            Take
-                        </button>
-                    `;
-
-                }
-
-
-                // -----------------------------------------
-                // CREATE ROW
-                // -----------------------------------------
-
-                const row =
-                    document.createElement("tr");
-
-
-                row.innerHTML = `
-
-                    <td>
-                        ${medicineName}
-                    </td>
-
-                    <td>
-                        1 Tablet
-                    </td>
-
-                    <td>
-                        ${medicineTime}
-                    </td>
-
-                    <td class="medicine-status">
-                        ${statusHTML}
-                    </td>
-
-                    <td>
-                        ${buttonHTML}
-                    </td>
-
-                `;
-
-
-                table.appendChild(row);
-
-            }
-        );
-
-
-        if (count === 0) {
-
-            table.innerHTML = `
-                <tr>
-                    <td colspan="5">
-                        No medicines found.
-                    </td>
-                </tr>
-            `;
+            table.appendChild(row);
 
         }
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Error loading medicines:",
-            error
-        );
-
-
-        table.innerHTML = `
-            <tr>
-                <td
-                    colspan="5"
-                    style="color:red;"
-                >
-                    Unable to load medicines.
-                </td>
-            </tr>
-        `;
-
-    }
+    );
 
 }
 
 
+function takeMedicine(id){
 
-// =====================================================
-// MARK MEDICINE TAKEN
-// =====================================================
+    markMedicineTaken(id);
 
-window.markMedicineTaken = async function(
-    button,
-    medicineId,
-    medicineName,
-    compartment
-) {
+    loadMedicines();
 
-    button.disabled = true;
-
-    button.textContent =
-        "Saving...";
+}
 
 
-    try {
+function undoMedicine(id){
 
-        const now =
-            new Date();
-
-
-        const date =
-            getToday();
+    const medicines =
+        getMedicines();
 
 
-        const actualTime =
-            String(
-                now.getHours()
-            ).padStart(2, "0")
-            +
-            ":"
-            +
-            String(
-                now.getMinutes()
-            ).padStart(2, "0");
-
-
-        let scheduledTime =
-            "08:00";
-
-
-        if (
-            compartment === "Afternoon"
-        ) {
-
-            scheduledTime =
-                "14:00";
-
-        }
-
-        else if (
-            compartment === "Evening"
-        ) {
-
-            scheduledTime =
-                "18:00";
-
-        }
-
-        else if (
-            compartment === "Night"
-        ) {
-
-            scheduledTime =
-                "20:00";
-
-        }
-
-
-        // ---------------------------------------------
-        // SAVE TO DOSE HISTORY
-        // ---------------------------------------------
-
-        await addDoc(
-            collection(
-                db,
-                "Dose History"
-            ),
-            {
-
-                actualTime:
-                    actualTime,
-
-                date:
-                    date,
-
-                medicineId:
-                    medicineId,
-
-                medicineName:
-                    medicineName,
-
-                patientId:
-                    PATIENT_ID,
-
-                scheduledTime:
-                    scheduledTime,
-
-                status:
-                    "TAKEN"
-
+    const medicine =
+        medicines.find(
+            function(m){
+                return m.id === id;
             }
         );
 
 
-        // ---------------------------------------------
-        // UPDATE SCREEN
-        // ---------------------------------------------
-
-        const row =
-            button.closest("tr");
+    const medicineName =
+        medicine
+        ? medicine.name
+        : "this medicine";
 
 
-        if (row) {
-
-            const statusCell =
-                row.querySelector(
-                    ".medicine-status"
-                );
-
-
-            if (statusCell) {
-
-                statusCell.innerHTML = `
-                    <span style="
-                        color:green;
-                        font-weight:600;
-                    ">
-                        ✔ Taken
-                    </span>
-                `;
-
-            }
-
-        }
-
-
-        button.textContent =
-            "Taken";
-
-
-        console.log(
-            "Medicine saved:",
-            medicineName
-        );
-
-
-        alert(
+    if(
+        !confirm(
+            "Mark " +
             medicineName +
-            " marked as Taken."
-        );
+            " as NOT TAKEN?"
+        )
+    ){
 
-
-        // Reload data so Firebase is the source of truth
-
-        await loadMedicines();
+        return;
 
     }
 
-    catch (error) {
 
-        console.error(
-            "FIREBASE SAVE ERROR:",
-            error
-        );
+    unTakeMedicine(id);
 
+    loadMedicines();
 
-        button.disabled =
-            false;
+}
 
 
-        button.textContent =
-            "Take";
-
-
-        alert(
-            "Unable to save medicine status.\n\n" +
-            error.message
-        );
-
-    }
-
-};
-
-
-// =====================================================
-// SEARCH
-// =====================================================
-
-const search =
-    document.getElementById(
-        "medicineSearch"
-    );
-
-
-search.addEventListener(
+document.getElementById(
+    "medicineSearch"
+).addEventListener(
     "input",
-    function() {
+    function(){
 
-        const text =
+        const search =
             this.value
             .toLowerCase()
             .trim();
 
 
-        const rows =
-            document.querySelectorAll(
-                "#medicineTableBody tr"
-            );
-
-
-        rows.forEach(
-            function(row) {
+        document.querySelectorAll(
+            "#medicineTableBody tr"
+        ).forEach(
+            function(row){
 
                 const name =
                     row.cells[0]
                     ?.textContent
-                    .toLowerCase();
+                    .toLowerCase()
+                    || "";
 
 
                 row.style.display =
-                    name &&
-                    name.includes(text)
-                        ? ""
-                        : "none";
+                    name.includes(search)
+                    ? ""
+                    : "none";
 
             }
         );
@@ -815,14 +537,24 @@ search.addEventListener(
 );
 
 
-// =====================================================
-// START
-// =====================================================
+document.addEventListener(
+    "DOMContentLoaded",
+    loadMedicines
+);
 
-loadMedicines();
+
+window.addEventListener(
+    "medicineStatusChanged",
+    loadMedicines
+);
+
+
+window.addEventListener(
+    "storage",
+    loadMedicines
+);
 
 </script>
-
 
 </body>
 

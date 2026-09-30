@@ -95,6 +95,7 @@ body{
     display:flex;
     min-height:100vh;
 }
+
 /* ===========================
    SIDEBAR
 =========================== */
@@ -132,6 +133,7 @@ body{
 .sidebar ul li a:hover{
     background:rgba(255,255,255,.2);
 }
+
 /* Active Page */
 
 .sidebar ul li.active a{
@@ -207,6 +209,38 @@ body{
 .profile-box span{
     font-weight:600;
 }
+
+/* ===========================
+   DASHBOARD SUMMARY - 4 BOXES
+=========================== */
+
+.dashboard-summary{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    width:100%;
+    margin-top:25px;
+    margin-bottom:30px;
+}
+
+.dashboard-summary .dashboard-card{
+    min-width:0;
+    min-height:150px;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.dashboard-summary .dashboard-card h3{
+    color:#666;
+    margin-bottom:10px;
+}
+
+.dashboard-summary .dashboard-card h2{
+    color:#0d6efd;
+}
+
 /* ===========================
    DASHBOARD CARDS
 =========================== */
@@ -233,6 +267,17 @@ body{
 
 .card h2{
     color:#0d6efd;
+}
+
+/* ===========================
+   HEALTH CARD
+=========================== */
+
+.health-card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
 }
 
 /* ===========================
@@ -297,6 +342,7 @@ td{
     padding:15px;
     border-radius:10px;
 }
+
 /* ===========================
    EMERGENCY SOS
 =========================== */
@@ -364,8 +410,100 @@ td{
 }
 
 /* ===========================
+   ACTION BUTTON
+=========================== */
+
+.action-btn{
+    margin-top:15px;
+    padding:10px 20px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+.action-btn:hover{
+    background:#1d4ed8;
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+
+.card,
+.patient-card,
+.schedule,
+.sos-card,
+.progress-card,
+.dashboard-summary .dashboard-card{
+    transition:0.3s ease;
+}
+
+.card:hover,
+.patient-card:hover,
+.schedule:hover,
+.sos-card:hover,
+.progress-card:hover,
+.dashboard-summary .dashboard-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+button{
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+/* ===========================
+   AI ASSISTANT
+=========================== */
+
+.ai-card{
+    margin-top:30px;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.ai-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.ai-card h2{
+    color:#2563eb;
+    margin-bottom:20px;
+}
+
+.ai-content p{
+    margin:12px 0;
+    font-size:16px;
+}
+
+.safe{
+    color:green;
+    font-weight:bold;
+}
+
+/* ===========================
    RESPONSIVE
 =========================== */
+
+@media(max-width:1100px){
+
+    .dashboard-summary{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
 
 @media(max-width:900px){
 
@@ -393,104 +531,48 @@ td{
     }
 
 }
-.action-btn{
-    margin-top:15px;
-    padding:10px 20px;
-    background:#2563eb;
-    color:white;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-    transition:.3s;
-}
 
-.action-btn:hover{
-    background:#1d4ed8;
-}
-/* ===========================
-   ANIMATIONS
-=========================== */
+@media(max-width:600px){
 
-.card,
-.patient-card,
-.schedule,
-.sos-card,
-.progress-card{
-    transition:0.3s ease;
-}
-
-.card:hover,
-.patient-card:hover,
-.schedule:hover,
-.sos-card:hover,
-.progress-card:hover{
-
-    transform:translateY(-6px);
-
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
-
-}
-
-button{
-
-    transition:0.3s;
-
-}
-
-button:hover{
-
-    transform:scale(1.05);
+    .dashboard-summary{
+        grid-template-columns:1fr;
+    }
 
 }
 /* ===========================
-   AI ASSISTANT
+   TOP 4 DASHBOARD SUMMARY BOXES
 =========================== */
 
-.ai-card{
+.top-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
 
-    margin-top:30px;
+.top-summary .card,
+.top-summary .health-card {
+    margin: 0;
+    min-width: 0;
+    min-height: 150px;
+}
 
-    background:white;
+/* Keep the rest of the dashboard unchanged */
 
-    padding:25px;
+@media (max-width: 1100px) {
 
-    border-radius:15px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.1);
-
-    transition:.3s;
+    .top-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
 }
 
-.ai-card:hover{
+@media (max-width: 600px) {
 
-    transform:translateY(-5px);
-
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
-
-}
-
-.ai-card h2{
-
-    color:#2563eb;
-
-    margin-bottom:20px;
-
-}
-
-.ai-content p{
-
-    margin:12px 0;
-
-    font-size:16px;
-
-}
-
-.safe{
-
-    color:green;
-
-    font-weight:bold;
+    .top-summary {
+        grid-template-columns: 1fr;
+    }
 
 }

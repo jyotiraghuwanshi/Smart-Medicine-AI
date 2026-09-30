@@ -4,13 +4,14 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Analytics | Smart Medicine AI</title>
 
-<link rel="stylesheet" href="css/style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet"
+href="css/style.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
 rel="stylesheet">
@@ -27,50 +28,94 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <div class="dashboard">
 
 
-<!-- ================= SIDEBAR ================= -->
-
 <div class="sidebar">
 
 <h2>
+
 <i class="fa-solid fa-pills"></i>
+
 Smart Medicine AI
+
 </h2>
+
 
 <ul>
 
 <li>
+
 <a href="dashboard.html">
+
 <i class="fa-solid fa-house"></i>
+
 Dashboard
+
 </a>
+
 </li>
 
+
 <li>
+
 <a href="medicines.html">
+
 <i class="fa-solid fa-capsules"></i>
+
 Medicines
+
 </a>
+
 </li>
+
 
 <li class="active">
+
 <a href="analytics.html">
+
 <i class="fa-solid fa-chart-line"></i>
+
 Analytics
+
 </a>
+
 </li>
 
+
 <li>
+
+<a href="ai.html">
+
+<i class="fa-solid fa-robot"></i>
+
+AI Assistant
+
+</a>
+
+</li>
+
+
+<li>
+
 <a href="caregiver.html">
+
 <i class="fa-solid fa-user-doctor"></i>
+
 Caregiver
+
 </a>
+
 </li>
 
+
 <li>
+
 <a href="profile.html">
+
 <i class="fa-solid fa-user"></i>
+
 Profile
+
 </a>
+
 </li>
 
 </ul>
@@ -78,14 +123,12 @@ Profile
 </div>
 
 
-<!-- ================= MAIN ================= -->
 
 <div class="main">
 
 
-<!-- ================= NAVBAR ================= -->
-
 <div class="navbar">
+
 
 <div>
 
@@ -104,6 +147,7 @@ Medicine Adherence Report
 
 <i class="fa-solid fa-bell"></i>
 
+
 <div class="profile-box">
 
 <i class="fa-solid fa-user-circle"></i>
@@ -119,7 +163,6 @@ Patient
 </div>
 
 
-<!-- ================= ANALYTICS CARDS ================= -->
 
 <div class="cards">
 
@@ -179,13 +222,16 @@ Adherence
 </div>
 
 
-<!-- ================= WEEKLY REPORT ================= -->
 
 <div class="schedule">
+
 
 <h2>
 Weekly Medicine Report
 </h2>
+
+
+<div style="overflow-x:auto;">
 
 
 <table>
@@ -213,25 +259,19 @@ Adherence
 
 <tbody id="weeklyReport">
 
-<tr>
-
-<td colspan="3" style="text-align:center;">
-Loading analytics...
-</td>
-
-</tr>
-
 </tbody>
 
-
 </table>
+
+
+</div>
 
 </div>
 
 
-<!-- ================= FOOTER ================= -->
 
-<footer style="text-align:center; margin-top:40px; color:#666;">
+<footer
+style="text-align:center;margin-top:40px;color:#666;">
 
 <hr style="margin-bottom:20px;">
 
@@ -251,432 +291,319 @@ AI-Based Medicine Reminder System
 <script src="js/script.js"></script>
 
 
-<!-- ================= FIREBASE ANALYTICS ================= -->
+<script>
 
-<script type="module">
+function loadAnalytics(){
 
-import { db } from "./js/firebase.js";
-
-import {
-    collection,
-    getDocs
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+    const patientName =
+        localStorage.getItem(
+            "patientName"
+        ) || "Patient";
 
 
-const PATIENT_ID = "P001";
+    document.getElementById(
+        "topPatientName"
+    ).textContent =
+        patientName;
 
 
-// =====================================================
-// GET DATE AS YYYY-MM-DD
-// =====================================================
 
-function formatDate(date) {
-
-    return (
-        date.getFullYear() +
-        "-" +
-        String(date.getMonth() + 1).padStart(2, "0") +
-        "-" +
-        String(date.getDate()).padStart(2, "0")
-    );
-
-}
+    const medicines =
+        getMedicines();
 
 
-// =====================================================
-// GET START OF CURRENT WEEK
-// MONDAY = FIRST DAY
-// =====================================================
-
-function getMonday(date) {
-
-    const result =
-        new Date(date);
-
-    const day =
-        result.getDay();
-
-    const difference =
-        day === 0
-            ? -6
-            : 1 - day;
-
-    result.setDate(
-        result.getDate() + difference
-    );
-
-    result.setHours(
-        0, 0, 0, 0
-    );
-
-    return result;
-
-}
+    const takenData =
+        getTakenMedicines();
 
 
-// =====================================================
-// LOAD ANALYTICS
-// =====================================================
-
-async function loadAnalytics() {
-
-    try {
-
-        // ---------------------------------------------
-        // LOAD MEDICINES
-        // ---------------------------------------------
-
-        const medicinesSnapshot =
-            await getDocs(
-                collection(db, "Medicines")
-            );
+    const today =
+        todayDate();
 
 
-        let medicineCount = 0;
+    const takenToday =
+        takenData[today] || {};
 
 
-        medicinesSnapshot.forEach(
-            function(medicineDoc) {
-
-                const medicine =
-                    medicineDoc.data();
+    let takenCount = 0;
 
 
-                if (
-                    medicine.patientId === PATIENT_ID
-                ) {
+    medicines.forEach(
+        function(medicine){
 
-                    medicineCount++;
+            if(
+                takenToday[medicine.id]
+            ){
 
-                }
+                takenCount++;
 
             }
+
+        }
+    );
+
+
+    const total =
+        medicines.length;
+
+
+    const missed =
+        Math.max(
+            total - takenCount,
+            0
         );
 
 
-        // ---------------------------------------------
-        // LOAD DOSE HISTORY
-        // ---------------------------------------------
+    const adherence =
+        total > 0
 
-        const doseHistorySnapshot =
-            await getDocs(
-                collection(db, "Dose History")
-            );
+        ?
+
+        Math.round(
+            (takenCount / total) * 100
+        )
+
+        :
+
+        0;
 
 
-        // ---------------------------------------------
-        // CURRENT WEEK
-        // ---------------------------------------------
 
-        const today =
+    document.getElementById(
+        "totalDoses"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "takenDoses"
+    ).textContent =
+        takenCount;
+
+
+    document.getElementById(
+        "missedDoses"
+    ).textContent =
+        missed;
+
+
+    document.getElementById(
+        "adherence"
+    ).textContent =
+        adherence + "%";
+
+
+
+    /* WEEKLY REPORT */
+
+    const body =
+        document.getElementById(
+            "weeklyReport"
+        );
+
+
+    body.innerHTML = "";
+
+
+    const days = [
+
+        "Monday",
+
+        "Tuesday",
+
+        "Wednesday",
+
+        "Thursday",
+
+        "Friday",
+
+        "Saturday",
+
+        "Sunday"
+
+    ];
+
+
+    const now =
+        new Date();
+
+
+    const currentDay =
+        now.getDay();
+
+
+    const mondayOffset =
+        currentDay === 0
+        ? -6
+        : 1 - currentDay;
+
+
+
+    for(
+        let i = 0;
+        i < 7;
+        i++
+    ){
+
+        const date =
             new Date();
 
 
-        const monday =
-            getMonday(today);
+        date.setDate(
+            now.getDate() +
+            mondayOffset +
+            i
+        );
 
 
-        // ---------------------------------------------
-        // COUNT TAKEN DOSES
-        // ---------------------------------------------
-
-        const takenByDate = {};
+        const year =
+            date.getFullYear();
 
 
-        doseHistorySnapshot.forEach(
-            function(doseDoc) {
+        const month =
+            String(
+                date.getMonth() + 1
+            ).padStart(2,"0");
 
-                const dose =
-                    doseDoc.data();
+
+        const day =
+            String(
+                date.getDate()
+            ).padStart(2,"0");
 
 
-                if (
-                    dose.patientId !== PATIENT_ID ||
-                    dose.status !== "TAKEN"
-                ) {
+        const dateKey =
+            year +
+            "-" +
+            month +
+            "-" +
+            day;
 
-                    return;
+
+        const dayData =
+            takenData[dateKey] || {};
+
+
+        let dayTaken = 0;
+
+
+        medicines.forEach(
+            function(medicine){
+
+                if(
+                    dayData[
+                        medicine.id
+                    ]
+                ){
+
+                    dayTaken++;
 
                 }
-
-
-                const doseDate =
-                    dose.date;
-
-
-                if (!takenByDate[doseDate]) {
-
-                    takenByDate[doseDate] = new Set();
-
-                }
-
-
-                /*
-                 * Using medicineId prevents duplicate
-                 * records from counting twice.
-                 */
-
-                takenByDate[doseDate].add(
-                    dose.medicineId
-                );
 
             }
         );
 
 
-        // ---------------------------------------------
-        // BUILD WEEKLY DATA
-        // ---------------------------------------------
+        const isFuture =
+            date > now;
 
-        const days = [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-        ];
 
+        const expected =
+            isFuture
+            ? 0
+            : total;
 
-        let totalDoses = 0;
 
-        let totalTaken = 0;
+        const percentage =
+            expected > 0
 
+            ?
 
-        const weeklyReport =
-            document.getElementById(
-                "weeklyReport"
-            );
+            Math.round(
+                (dayTaken / expected) * 100
+            )
 
+            :
 
-        weeklyReport.innerHTML = "";
-
-
-        for (
-            let i = 0;
-            i < 7;
-            i++
-        ) {
-
-            const currentDate =
-                new Date(monday);
-
-
-            currentDate.setDate(
-                monday.getDate() + i
-            );
-
-
-            const dateString =
-                formatDate(currentDate);
-
-
-            // Do not count future days as missed
-
-            const isFuture =
-                currentDate > today;
-
-
-            let expected =
-                0;
-
-
-            let taken =
-                0;
-
-
-            if (!isFuture) {
-
-                expected =
-                    medicineCount;
-
-
-                if (
-                    takenByDate[dateString]
-                ) {
-
-                    taken =
-                        takenByDate[
-                            dateString
-                        ].size;
-
-                }
-
-            }
-
-
-            let percentage =
-                0;
-
-
-            if (expected > 0) {
-
-                percentage =
-                    Math.round(
-                        (taken / expected) * 100
-                    );
-
-            }
-
-
-            totalDoses += expected;
-
-            totalTaken += taken;
-
-
-            let percentageColor =
-                "red";
-
-
-            if (percentage >= 80) {
-
-                percentageColor =
-                    "green";
-
-            }
-
-            else if (percentage >= 50) {
-
-                percentageColor =
-                    "orange";
-
-            }
-
-
-            const row =
-                document.createElement("tr");
-
-
-            row.innerHTML = `
-
-                <td>
-                    ${days[i]}
-                </td>
-
-                <td>
-                    ${taken} / ${expected}
-                </td>
-
-                <td style="color:${percentageColor}; font-weight:600;">
-                    ${isFuture ? "--" : percentage + "%"}
-                </td>
-
-            `;
-
-
-            weeklyReport.appendChild(row);
-
-        }
-
-
-        // ---------------------------------------------
-        // MISSED DOSES
-        // ---------------------------------------------
-
-        const missed =
-            Math.max(
-                totalDoses - totalTaken,
-                0
-            );
-
-
-        // ---------------------------------------------
-        // ADHERENCE
-        // ---------------------------------------------
-
-        let adherence =
             0;
 
 
-        if (totalDoses > 0) {
-
-            adherence =
-                Math.round(
-                    (totalTaken / totalDoses) * 100
-                );
-
-        }
+        const row =
+            document.createElement(
+                "tr"
+            );
 
 
-        // ---------------------------------------------
-        // UPDATE CARDS
-        // ---------------------------------------------
+        row.innerHTML =
 
-        document.getElementById(
-            "totalDoses"
-        ).textContent =
-            totalDoses;
+            "<td>" +
+            days[i] +
+            "</td>" +
 
+            "<td>" +
 
-        document.getElementById(
-            "takenDoses"
-        ).textContent =
-            totalTaken;
+            (
+                isFuture
 
+                ?
 
-        document.getElementById(
-            "missedDoses"
-        ).textContent =
-            missed;
+                "--"
 
+                :
 
-        document.getElementById(
-            "adherence"
-        ).textContent =
-            adherence + "%";
+                dayTaken +
+                " / " +
+                expected
+            )
 
+            +
 
-        console.log(
-            "Analytics loaded:",
-            {
-                totalDoses,
-                totalTaken,
-                missed,
-                adherence
-            }
-        );
+            "</td>" +
 
-    }
+            "<td style='font-weight:600;'>" +
 
-    catch (error) {
+            (
+                isFuture
 
-        console.error(
-            "Analytics Firebase error:",
-            error
-        );
+                ?
+
+                "--"
+
+                :
+
+                percentage +
+                "%"
+            )
+
+            +
+
+            "</td>";
 
 
-        document.getElementById(
-            "weeklyReport"
-        ).innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="3"
-                    style="color:red;text-align:center;"
-                >
-                    Unable to load analytics.
-                </td>
-
-            </tr>
-
-        `;
+        body.appendChild(row);
 
     }
 
 }
 
 
-// =====================================================
-// START
-// =====================================================
+document.addEventListener(
+    "DOMContentLoaded",
+    loadAnalytics
+);
 
-loadAnalytics();
+
+window.addEventListener(
+    "medicineStatusChanged",
+    loadAnalytics
+);
+
+
+window.addEventListener(
+    "storage",
+    loadAnalytics
+);
 
 </script>
-
 
 </body>
 

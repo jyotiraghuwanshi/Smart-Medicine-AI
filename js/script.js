@@ -1,20 +1,28 @@
-// =============================
-// LOGIN FUNCTION
-// =============================
+/* =========================================================
+   SMART MEDICINE AI - MAIN SCRIPT
+   Uses login/localStorage as the main patient data source
+========================================================= */
+
+
+/* =========================
+   LOGIN / BASIC FUNCTIONS
+========================= */
+
 function login() {
     window.location.href = "dashboard.html";
 }
 
 
-// =============================
-// EMERGENCY SOS
-// =============================
-function emergencySOS() {
+/* =========================
+   EMERGENCY SOS
+========================= */
 
-    let caregiverName =
-        localStorage.getItem("caregiverName");
+function sendSOS() {
 
-    let caregiverNumber =
+    const caregiverName =
+        localStorage.getItem("caregiverName") || "Caregiver";
+
+    const caregiverNumber =
         localStorage.getItem("caregiverNumber");
 
     if (!caregiverNumber) {
@@ -22,31 +30,29 @@ function emergencySOS() {
         return;
     }
 
-    const confirmSOS = confirm(
-        "Send emergency alert to " +
-        (caregiverName || "Caregiver") +
-        "?"
-    );
-
-    if (confirmSOS) {
-        window.location.href =
-            "sms:" +
-            caregiverNumber +
-            "?body=Emergency! The patient needs immediate assistance.";
+    if (
+        confirm(
+            "Call " +
+            caregiverName +
+            " for emergency assistance?"
+        )
+    ) {
+        window.location.href = "tel:" + caregiverNumber;
     }
 }
 
 
-// =============================
-// LIVE DATE, TIME & GREETING
-// =============================
+/* =========================
+   DATE + CLOCK
+========================= */
+
 function updateDateTime() {
 
     const now = new Date();
 
     const hour = now.getHours();
 
-    let greeting = "";
+    let greeting;
 
     if (hour < 12) {
         greeting = "Good Morning";
@@ -73,223 +79,293 @@ function updateDateTime() {
 
 
     if (greetingElement) {
-        greetingElement.innerHTML =
-            greeting + " 👋";
+        greetingElement.textContent = greeting;
     }
 
 
     if (dateElement) {
 
-        dateElement.innerHTML =
-            now.toLocaleDateString("en-IN", {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            });
+        dateElement.textContent =
+            now.toLocaleDateString(
+                "en-IN",
+                {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                }
+            );
     }
 
 
     if (clockElement) {
 
-        let hours = now.getHours();
-
-        const minutes =
-            String(now.getMinutes()).padStart(2, "0");
-
-        const seconds =
-            String(now.getSeconds()).padStart(2, "0");
-
-        const period =
-            hours >= 12 ? "PM" : "AM";
-
-        hours = hours % 12;
-
-        if (hours === 0) {
-            hours = 12;
-        }
-
         clockElement.textContent =
-            String(hours).padStart(2, "0") +
-            ":" +
-            minutes +
-            ":" +
-            seconds +
-            " " +
-            period;
+            now.toLocaleTimeString(
+                "en-IN",
+                {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: true
+                }
+            );
     }
 }
 
 
-// Start clock
-updateDateTime();
+/* =========================
+   DATE HELPER
+========================= */
 
-setInterval(updateDateTime, 1000);
+function todayDate() {
+
+    const d = new Date();
+
+    return (
+        d.getFullYear() +
+        "-" +
+        String(d.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(d.getDate()).padStart(2, "0")
+    );
+}
 
 
-// =============================
-// MARK MEDICINE AS TAKEN
-// =============================
-function markTaken(button) {
+/* =========================
+   TIME FORMAT
+========================= */
 
-    const row = button.closest("tr");
+function formatMedicineTime(time) {
 
-    if (!row) {
-        return;
+    if (!time) {
+        return "--";
     }
 
-    const medicineName =
-        row.cells[0].innerText.trim();
+    const parts = String(time).split(":");
 
-    const statusCell =
-        row.cells[3];
+    if (parts.length < 2) {
+        return time;
+    }
+
+    let hour = Number(parts[0]);
+
+    const minute = parts[1];
+
+    if (Number.isNaN(hour)) {
+        return time;
+    }
+
+    const period = hour >= 12 ? "PM" : "AM";
+
+    hour = hour % 12 || 12;
+
+    return hour + ":" + minute + " " + period;
+}
 
 
-    // Change status
-    statusCell.innerHTML =
-        '<span style="color:green;">✔ Taken</span>';
+/* =========================
+   GET LOGIN MEDICINES
+========================= */
+
+function getMedicines() {
+
+    const medicines = [];
+
+    for (let i = 1; i <= 3; i++) {
+
+        const name =
+            (
+                localStorage.getItem(
+                    "medicine" + i
+                ) || ""
+            ).trim();
+
+        const time =
+            localStorage.getItem(
+                "medicine" + i + "Time"
+            ) || "";
 
 
-    // Change button
-    button.innerHTML = "Taken";
+        medicines.push({
 
-    button.disabled = true;
+            slot: i,
+
+            id:
+                "local-medicine-" + i,
+
+            name:
+                name ||
+                "Medicine " + i,
+
+            time:
+                time ||
+                [
+                    "08:00",
+                    "14:00",
+                    "20:00"
+                ][i - 1]
+
+        });
+    }
+
+    return medicines;
+}
 
 
-    // Save status
+/* =========================
+   MEDICINE STATUS STORAGE
+========================= */
+
+function getTakenMedicines() {
+
+    const saved =
+        localStorage.getItem(
+            "takenMedicines"
+        );
+
+    if (!saved) {
+        return {};
+    }
+
+    try {
+        return JSON.parse(saved);
+    }
+    catch (error) {
+        return {};
+    }
+}
+
+
+function saveTakenMedicines(data) {
+
     localStorage.setItem(
-        medicineName,
-        "taken"
+        "takenMedicines",
+        JSON.stringify(data)
+    );
+}
+
+
+/* =========================
+   CHECK IF MEDICINE IS TAKEN
+========================= */
+
+function isMedicineTaken(id) {
+
+    const data =
+        getTakenMedicines();
+
+    const today =
+        todayDate();
+
+    return (
+        data[today] &&
+        data[today][id] === true
+    );
+}
+
+
+/* =========================
+   MARK MEDICINE AS TAKEN
+========================= */
+
+function markMedicineTaken(id) {
+
+    const data =
+        getTakenMedicines();
+
+    const today =
+        todayDate();
+
+
+    if (!data[today]) {
+        data[today] = {};
+    }
+
+
+    data[today][id] = true;
+
+
+    saveTakenMedicines(data);
+
+
+    window.dispatchEvent(
+        new Event("medicineStatusChanged")
+    );
+}
+
+
+/* =========================
+   UNTAKE MEDICINE
+========================= */
+
+function unTakeMedicine(id) {
+
+    const data =
+        getTakenMedicines();
+
+    const today =
+        todayDate();
+
+
+    if (data[today]) {
+
+        delete data[today][id];
+
+        saveTakenMedicines(data);
+    }
+
+
+    window.dispatchEvent(
+        new Event("medicineStatusChanged")
+    );
+}
+
+
+/* =========================
+   CLEAN OLD STATUS
+========================= */
+
+function cleanOldMedicineStatus() {
+
+    const data =
+        getTakenMedicines();
+
+    const today =
+        todayDate();
+
+
+    Object.keys(data).forEach(
+        function (date) {
+
+            if (date !== today) {
+                delete data[date];
+            }
+
+        }
     );
 
 
-    // Update dashboard progress
-    updateMedicineProgress();
+    saveTakenMedicines(data);
 }
 
 
-// =============================
-// RESTORE MEDICINE STATUS
-// =============================
-function restoreMedicineStatus() {
+/* =========================
+   START CLOCK
+========================= */
 
-    const buttons =
-        document.querySelectorAll(".take-btn");
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
+        updateDateTime();
 
-    buttons.forEach(function(button) {
-
-        const row =
-            button.closest("tr");
-
-        if (!row) {
-            return;
-        }
-
-        const medicineName =
-            row.cells[0].innerText.trim();
-
-
-        if (
-            localStorage.getItem(medicineName)
-            === "taken"
-        ) {
-
-            button.innerHTML = "Taken";
-
-            button.disabled = true;
-
-
-            row.cells[3].innerHTML =
-                '<span style="color:green;">✔ Taken</span>';
-        }
-
-    });
-
-
-    updateMedicineProgress();
-}
-
-
-// =============================
-// MEDICINE PROGRESS
-// =============================
-function updateMedicineProgress() {
-
-    const medicines = [
-        "BP Tablet",
-        "Vitamin D",
-        "Memory Tablet",
-        "Calcium Tablet"
-    ];
-
-
-    let takenCount = 0;
-
-
-    medicines.forEach(function(medicine) {
-
-        if (
-            localStorage.getItem(medicine)
-            === "taken"
-        ) {
-
-            takenCount++;
-        }
-
-    });
-
-
-    const totalMedicines =
-        medicines.length;
-
-
-    const percentage =
-        Math.round(
-            (takenCount / totalMedicines) * 100
+        setInterval(
+            updateDateTime,
+            1000
         );
 
+        cleanOldMedicineStatus();
 
-    const progressFill =
-        document.getElementById(
-            "medicineProgressFill"
-        );
-
-
-    const progressText =
-        document.getElementById(
-            "medicineProgressText"
-        );
-
-
-    if (progressFill) {
-
-        progressFill.innerHTML =
-            percentage + "%";
-
-        progressFill.style.width =
-            percentage + "%";
     }
-
-
-    if (progressText) {
-
-        progressText.innerHTML =
-            takenCount +
-            " out of " +
-            totalMedicines +
-            " medicines taken today.";
-    }
-}
-
-
-// =============================
-// PAGE LOAD
-// =============================
-window.addEventListener("load", function() {
-
-    restoreMedicineStatus();
-
-    updateMedicineProgress();
-
-});
+);
